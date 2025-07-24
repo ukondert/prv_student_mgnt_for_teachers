@@ -1,36 +1,65 @@
-# MCP Server Integration Guide
+# Flutter MCP Server Integration Guide
 
-## 🌟 Verfügbare MCP Server
+## 🌟 MCP Server für Flutter-Entwicklung
 
-### 🗃️ Datenbank & Speicher Server
+### 🗃️ Backend & Datenbank Server
 
-#### PostgreSQL MCP Server
+#### Firebase MCP Server
 ```json
 {
   "command": "npx",
-  "args": ["-y", "@modelcontextprotocol/server-postgres"],
+  "args": ["-y", "@firebase/mcp-server"],
   "env": {
-    "POSTGRES_URL": "postgresql://user:password@localhost:5432/dbname"
+    "FIREBASE_PROJECT_ID": "your-project-id",
+    "FIREBASE_PRIVATE_KEY": "your-service-account-key"
   }
 }
 ```
 
-**Capabilities:**
-- Schema-Exploration
-- SQL-Queries ausführen
-- Datenbank-Operationen (CRUD)
-- Transaction-Management
+**Flutter Integration:**
+- Firestore Database-Operationen
+- Firebase Authentication
+- Cloud Functions Integration
+- Firebase Storage für File-Uploads
+- Push Notifications (FCM)
 
-**Verwendung:**
-```typescript
-// Über MCP Client
-const users = await mcp.call('postgres', 'query', {
-  sql: 'SELECT * FROM users WHERE active = true',
-  params: []
-});
+**Dart Code Beispiel:**
+```dart
+// Firestore Collection abfragen
+final users = await FirebaseFirestore.instance
+  .collection('users')
+  .where('isActive', isEqualTo: true)
+  .get();
 ```
 
-#### SQLite MCP Server
+#### Supabase MCP Server
+```json
+{
+  "command": "npx", 
+  "args": ["-y", "supabase-mcp-server"],
+  "env": {
+    "SUPABASE_URL": "https://your-project.supabase.co",
+    "SUPABASE_SERVICE_ROLE_KEY": "your-service-role-key"
+  }
+}
+```
+
+**Flutter Integration:**
+- PostgreSQL-Backend mit REST API
+- Real-time Subscriptions
+- Authentication mit Row Level Security
+- File Storage
+
+**Dart Code Beispiel:**
+```dart
+// Supabase Client
+final response = await Supabase.instance.client
+  .from('users')
+  .select()
+  .eq('status', 'active');
+```
+
+#### SQLite MCP Server (Lokal)
 ```json
 {
   "command": "npx",
@@ -38,16 +67,32 @@ const users = await mcp.call('postgres', 'query', {
 }
 ```
 
-**Ideal für:**
-- Lokale Entwicklung
-- Prototyping
-- Embedded Applications
+**Flutter Integration:**
+- Lokale Datenbank mit sqflite
+- Offline-First Apps
+- Daten-Synchronisation
 
-#### Redis MCP Server
-```json
-{
-  "command": "npx",
-  "args": ["-y", "mcp-server-redis"],
+**Dart Code Beispiel:**
+```dart
+// SQLite Database Helper
+class DatabaseHelper {
+  static Future<Database> _database() async {
+    return openDatabase(
+      'app_database.db',
+      version: 1,
+      onCreate: (db, version) {
+        return db.execute('''
+          CREATE TABLE users(
+            id INTEGER PRIMARY KEY,
+            name TEXT,
+            email TEXT
+          )
+        ''');
+      },
+    );
+  }
+}
+```
   "env": {
     "REDIS_URL": "redis://localhost:6379"
   }

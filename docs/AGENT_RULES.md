@@ -1,53 +1,92 @@
-# Agent-Regeln für GitHub Copilot Context Engineering
+# Flutter Agent-Regeln für GitHub Copilot Context Engineering
 
-## 🎯 Primäre Direktiven
+## 🎯 Primäre Direktiven für Flutter-Entwicklung
 
-Als GitHub Copilot Agent für Context Engineering befolgen Sie diese fundamentalen Regeln:
+Als GitHub Copilot Agent für Flutter Context Engineering befolgen Sie diese fundamentalen Regeln:
 
-### 1. Projektverständnis
-- **IMMER** die gesamte Projektstruktur analysieren bevor Sie Code generieren
-- Bestehende Patterns und Konventionen aus dem `examples/` Ordner verstehen
-- Abhängigkeiten und Architektur-Entscheidungen respektieren
-- Konsistenz mit vorhandenen Code-Styles beibehalten
+### 1. Flutter-Projektverständnis
+- **IMMER** die gesamte Flutter-Projektstruktur (`lib/`, `pubspec.yaml`, `android/`, `ios/`) analysieren
+- Bestehende Widget-Patterns und Dart-Konventionen aus dem `examples/widgets/` Ordner verstehen
+- Flutter Version, Dart Version und Ziel-Plattformen (iOS/Android/Web) berücksichtigen
+- Konsistenz mit vorhandenen State Management-Lösungen (Provider, Bloc, Riverpod) beibehalten
 
-### 2. Context-Driven Development
-- Nutzen Sie verfügbare MCP Server für externe Datenquellen
-- Berücksichtigen Sie die Dokumentation in `docs/` für Kontext
-- Verwenden Sie die Templates in `templates/` als Ausgangspunkt
-- Beziehen Sie sich auf `PATTERNS.md` für bewährte Praktiken
+### 2. Flutter Context-Driven Development
+- Nutzen Sie Flutter-spezifische MCP Server (Firebase, Supabase) für Backend-Integration
+- Berücksichtigen Sie die Flutter-Dokumentation in `docs/` für Widget-Patterns
+- Verwenden Sie die Widget-Templates in `templates/` als Ausgangspunkt
+- Beziehen Sie sich auf `PATTERNS.md` für Flutter-bewährte Praktiken
 
-### 3. Qualitätsstandards
-- Generieren Sie IMMER Tests für neuen Code
-- Dokumentieren Sie komplexe Logik inline
-- Folgen Sie Security Best Practices
-- Implementieren Sie Error Handling
-- Optimieren Sie für Maintainability
+### 3. Flutter-Qualitätsstandards
+- Generieren Sie IMMER Widget Tests für neue Widgets
+- Dokumentieren Sie komplexe State Management-Logik inline
+- Folgen Sie Flutter Security Best Practices (keine Secrets in Code)
+- Implementieren Sie Error Handling für async/await Operationen
+- Optimieren Sie für Performance (const constructors, repaintBoundary)
 
-## 🔧 Technische Richtlinien
+## 🔧 Flutter-spezifische Technische Richtlinien
 
-### Code-Generierung
-```typescript
-// ✅ RICHTIG: Konsistent mit Projektpatterns
-export class UserService {
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly logger: Logger
-  ) {}
+### Widget-Generierung
+```dart
+// ✅ RICHTIG: Flutter Widget Pattern
+class UserProfileCard extends StatelessWidget {
+  const UserProfileCard({
+    super.key,
+    required this.user,
+    this.onTap,
+    this.elevation = 4.0,
+  });
 
-  async createUser(userData: CreateUserDto): Promise<User> {
-    try {
-      this.logger.info('Creating user', { email: userData.email });
-      
-      // Validation
-      await this.validateUserData(userData);
-      
-      // Business logic
-      const user = await this.userRepository.create(userData);
-      
-      // Event emission
-      this.eventBus.emit('user.created', user);
-      
-      return user;
+  final User user;
+  final VoidCallback? onTap;
+  final double elevation;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
+    return Card(
+      elevation: elevation,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12.0),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Avatar
+              CircleAvatar(
+                radius: 30,
+                backgroundImage: user.avatarUrl != null
+                  ? NetworkImage(user.avatarUrl!)
+                  : null,
+                child: user.avatarUrl == null
+                  ? Text(user.initials)
+                  : null,
+              ),
+              const SizedBox(height: 12),
+              
+              // Name
+              Text(
+                user.name,
+                style: theme.textTheme.titleLarge,
+              ),
+              
+              // Email
+              Text(
+                user.email,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: theme.colorScheme.onSurfaceVariant,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
     } catch (error) {
       this.logger.error('Failed to create user', error);
       throw new ServiceError('User creation failed', error);

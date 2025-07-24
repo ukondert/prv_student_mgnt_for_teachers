@@ -1,50 +1,72 @@
-# Code Patterns & Best Practices
+# Flutter Code Patterns & Best Practices
 
-## 🏗️ Architektur-Patterns
+## 🏗️ Flutter Architektur-Patterns
 
-### Clean Architecture Pattern
-```typescript
-// Domain Layer
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  createdAt: Date;
+### Clean Architecture für Flutter
+```dart
+// Domain Layer - Business Logic
+abstract class User {
+  String get id;
+  String get email;
+  String get name;
+  String? get avatarUrl;
+  DateTime get createdAt;
 }
 
-export interface UserRepository {
-  findById(id: string): Promise<User | null>;
-  create(user: Omit<User, 'id' | 'createdAt'>): Promise<User>;
-  update(id: string, updates: Partial<User>): Promise<User>;
-  delete(id: string): Promise<void>;
+abstract class UserRepository {
+  Future<User?> findById(String id);
+  Future<User> create(CreateUserRequest request);
+  Future<User> update(String id, UpdateUserRequest request);
+  Future<void> delete(String id);
+  Stream<List<User>> watchUsers();
 }
 
-// Application Layer
-export class UserService {
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly eventBus: EventBus,
-    private readonly logger: Logger
-  ) {}
+// Application Layer - Use Cases
+class CreateUserUseCase {
+  const CreateUserUseCase(this._repository);
+  
+  final UserRepository _repository;
 
-  async createUser(userData: CreateUserDto): Promise<User> {
-    const user = await this.userRepository.create(userData);
-    await this.eventBus.emit('user.created', user);
-    this.logger.info('User created', { userId: user.id });
-    return user;
+  Future<User> call(CreateUserRequest request) async {
+    // Validation
+    if (request.email.isEmpty) {
+      throw ValidationException('Email is required');
+    }
+    
+    // Business rules
+    final existingUser = await _repository.findByEmail(request.email);
+    if (existingUser != null) {
+      throw BusinessException('User already exists');
+    }
+    
+    // Create user
+    return _repository.create(request);
   }
 }
 
-// Infrastructure Layer
-export class PostgresUserRepository implements UserRepository {
-  constructor(private readonly db: Database) {}
+// Infrastructure Layer - Data Sources
+class FirebaseUserRepository implements UserRepository {
+  const FirebaseUserRepository(this._firestore);
+  
+  final FirebaseFirestore _firestore;
 
-  async findById(id: string): Promise<User | null> {
-    const result = await this.db.query(
-      'SELECT * FROM users WHERE id = $1',
-      [id]
-    );
-    return result.rows[0] || null;
+  @override
+  Future<User?> findById(String id) async {
+    final doc = await _firestore.collection('users').doc(id).get();
+    if (!doc.exists) return null;
+    
+    return UserModel.fromFirestore(doc);
+  }
+
+  @override
+  Stream<List<User>> watchUsers() {
+    return _firestore
+        .collection('users')
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => UserModel.fromFirestore(doc))
+            .toList());
   }
 }
 ```

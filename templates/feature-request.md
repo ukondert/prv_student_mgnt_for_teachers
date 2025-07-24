@@ -1,15 +1,22 @@
-# Feature Request Template
+# Flutter Feature Request Template
 
-## 📋 Feature Beschreibung
+## � Feature Übersicht
 
-### Was soll implementiert werden?
-<!-- Beschreiben Sie das gewünschte Feature detailliert -->
+**Feature Name:** [Name des Features]
+**Priorität:** [Hoch/Mittel/Niedrig]
+**Sprint/Version:** [Ziel-Sprint oder Version]
+**Platform:** [iOS/Android/Web/Alle]
 
-### Warum ist dieses Feature wichtig?
-<!-- Business Value, User Pain Points, etc. -->
+## 🎯 Ziel und Motivation
 
-### Welche Benutzer profitieren davon?
-<!-- Zielgruppe, Personas, Use Cases -->
+### Problem Statement
+[Beschreibung des Problems oder der Verbesserungsmöglichkeit]
+
+### Zielgruppe
+[Wer wird von diesem Feature profitieren?]
+
+### Success Metrics
+[Wie messen wir den Erfolg?]
 
 ## 🎯 Akzeptanzkriterien
 

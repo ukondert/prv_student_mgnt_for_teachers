@@ -1,53 +1,112 @@
-# Erweiterte Workflows für Context Engineering
+# Flutter-spezifische Workflows für Context Engineering
 
-## 🎭 Chatmode-basierte Workflows
+## 🚀 Flutter-Entwicklung Workflows
 
-### Feature Request Chatmode
+### Flutter Widget-Entwicklung Workflow
 
-Der Feature Request Chatmode (`.github/chatmodes/feature-request.chatmode.md`) automatisiert die Erstellung strukturierter Feature Requests.
-
-**Verwendung:**
-
+**Schritt 1: Widget-Analyse**
 ```bash
-@feature-request Erstelle Feature Request für [Beschreibung]
+@workspace Analysiere die UI-Anforderungen für [Widget-Name]
 ```
 
-**Workflow:**
+Der Agent analysiert:
+- Bestehende Design-Patterns im Projekt
+- Material Design 3 Guidelines
+- Theme-Integration
+- Accessibility-Anforderungen
 
-1. **Initiierung**: Aktiviere den Feature Request Chatmode
-2. **Klärung**: Der Agent stellt 3-5 strategische Fragen zur Anforderungsklärung
-3. **Analyse**: Automatische Codebase-Analyse für technische Einschränkungen
-4. **Generierung**: Vollständige `feature-request.md` wird erstellt
-5. **Integration**: Automatische Referenzierung von MCP Servern und Projektressourcen
-
-**Vorteile:**
-
-- Konsistente Feature Request Struktur
-- Automatische Integration mit bestehenden Patterns
-- MCP Server Empfehlungen
-- Direkte Verknüpfung zu Implementierungsbeispielen
-
-**Typische Anwendungsfälle:**
-
-```bash
-@feature-request Erstelle Feature Request für Benutzer-Dashboard
-@feature-request Plane Feature für Multi-Tenant-Authentifizierung
-@feature-request Definiere Anforderungen für API Rate Limiting
+**Schritt 2: Widget-Struktur planen**
+```dart
+// Agent erstellt Struktur-Vorschlag
+class MyCustomWidget extends StatelessWidget {
+  const MyCustomWidget({
+    super.key,
+    required this.data,
+    this.onPressed,
+    this.variant = WidgetVariant.primary,
+  });
+  
+  // Properties und Build-Methode
+}
 ```
 
-### Product Requirements Document (PRD) Chatmode
+**Schritt 3: Implementation mit Tests**
+- Widget-Code mit const constructors
+- Responsive Design für verschiedene Screen-Größen
+- Widget Tests für verschiedene States
+- Integration Tests für User-Interaktionen
 
-Der PRD Chatmode (`.github/chatmodes/prd.chatmode.md`) erstellt umfassende Produktspezifikationen.
+**MCP Server Integration:**
+- Design System APIs für Farben und Spacing
+- Figma MCP für Design Assets
+- Testing MCP für automatische Test-Generierung
 
-**Verwendung:**
+### Flutter App-Architektur Workflow
 
+**Schritt 1: Architektur-Pattern wählen**
 ```bash
-@prd Erstelle PRD für [Projektname/Feature]
+@workspace Empfehle Architektur-Pattern für eine [App-Typ] mit [Features]
 ```
 
-**Workflow:**
+**Clean Architecture für Flutter:**
+```
+lib/
+├── core/              # Shared utilities
+├── features/          # Feature modules
+│   ├── auth/
+│   │   ├── domain/    # Business logic
+│   │   ├── data/      # Data sources
+│   │   └── presentation/ # UI layer
+└── shared/            # Shared components
+```
 
-1. **Projektanalyse**: Umfassende Codebase-Analyse
+**Schritt 2: State Management Setup**
+- Provider für einfache Apps
+- Bloc für complex state management
+- Riverpod für advanced dependency injection
+- GetX für lightweight solutions
+
+**Schritt 3: Dependency Injection**
+```dart
+// Service Locator Pattern
+void configureDependencies() {
+  GetIt.instance.registerLazySingleton<UserRepository>(
+    () => UserRepositoryImpl(
+      localDataSource: GetIt.instance(),
+      remoteDataSource: GetIt.instance(),
+    ),
+  );
+}
+```
+
+### Flutter Backend-Integration Workflow
+
+**API-Integration mit HTTP**
+```dart
+class ApiService {
+  static const String baseUrl = 'https://api.example.com';
+  
+  Future<List<User>> getUsers() async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/users'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+    
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonData = json.decode(response.body);
+      return jsonData.map((json) => User.fromJson(json)).toList();
+    } else {
+      throw ApiException('Failed to load users');
+    }
+  }
+}
+```
+
+**MCP Server für Backend:**
+- Firebase MCP für Firestore und Auth
+- Supabase MCP für PostgreSQL Backend
+- GraphQL MCP für Graph APIs
+- OpenAPI MCP für REST APIs
 2. **Stakeholder-Mapping**: Identifikation von Zielgruppen und Personas
 3. **Anforderungssammlung**: Strukturierte Erfassung funktionaler und nicht-funktionaler Anforderungen
 4. **User Story Generation**: Automatische Erstellung testbarer User Stories mit eindeutigen IDs
