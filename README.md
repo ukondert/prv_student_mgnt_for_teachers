@@ -24,11 +24,16 @@ Context Engineering ist der nächste Evolutionsschritt nach Prompt Engineering, 
 
 ```yaml
 flutter_context_engineering/
-├── .copilot/                    # Copilot Agent Konfiguration
-│   ├── agent-settings.json     # Flutter-spezifische Agent-Einstellungen
-│   └── mcp-config.json         # MCP Server für Flutter-Backend
+├── .github/                     # GitHub Copilot Instructions (VS Code Standard)
+│   ├── copilot-instructions.md  # Haupt-Instructions (automatisch aktiv)
+│   ├── README.md               # Anleitung zur Instructions-Struktur
+│   └── instructions/           # Spezialisierte Instructions Files
+│       ├── widget-development.instructions.md
+│       ├── testing.instructions.md
+│       ├── performance-deployment.instructions.md
+│       └── security.instructions.md
 ├── docs/                       # Flutter-Projektdokumentation
-│   ├── AGENT_RULES.md          # Flutter Agent-Regeln & Dart-Konventionen
+│   ├── AGENT_RULES.md          # Referenz zu Instructions (migriert)
 │   ├── PATTERNS.md             # Flutter Widget-Patterns & State Management
 │   ├── MCP_SERVERS.md          # Backend & API MCP Server
 │   └── WORKFLOWS.md            # Flutter-Entwicklung Workflows
@@ -67,16 +72,24 @@ cd template_context_engineering_flutter
 .\scripts\setup-mcp.ps1
 ```
 
-### 2. Flutter Projekt initialisieren
+### 2. Projekt anpassen
 
 ```bash
-# Neues Flutter Projekt erstellen
-flutter create my_flutter_app
-cd my_flutter_app
+# Projektname in pubspec.yaml anpassen
+# name: my_flutter_app
+# description: A new Flutter project with Context Engineering
 
-# Template-Dateien kopieren
-copy ..\examples\* .\
-copy ..\docs\* .\docs\
+# Optional: Android Package Name anpassen
+# android/app/build.gradle: applicationId "com.example.my_flutter_app"
+
+# Optional: iOS Bundle Identifier anpassen  
+# ios/Runner.xcodeproj/project.pbxproj: PRODUCT_BUNDLE_IDENTIFIER
+
+# Flutter Dependencies installieren
+flutter pub get
+
+# Projekt validieren
+flutter analyze
 ```
 
 ### 3. VS Code mit Flutter Extensions öffnen
@@ -85,21 +98,49 @@ copy ..\docs\* .\docs\
 code .
 ```
 
-### 4. GitHub Copilot Agent aktivieren
+### 4. GitHub Copilot Instructions aktivieren
 
-- Öffnen Sie die Command Palette (`Ctrl+Shift+P`)
-- Wählen Sie "GitHub Copilot: Open Chat"
-- Nutzen Sie die Flutter-optimierten Agent-Modi:
-  - `@workspace` - Flutter App-weite Fragen
-  - `@terminal` - Flutter CLI-Kommandos
-  - `@vscode` - Flutter Extension spezifische Hilfe
+Die neuen GitHub Copilot Instructions werden automatisch erkannt:
 
-### 5. Erste Flutter App entwickeln
+- **Automatische Aktivierung**: `.github/copilot-instructions.md` wird von VS Code automatisch geladen
+- **Spezielle Instructions**: Files in `.github/instructions/` werden basierend auf `applyTo`-Patterns angewendet
+- **Setting aktivieren** (optional): `"github.copilot.chat.codeGeneration.useInstructionFiles": true`
+- **Detaillierte Anleitung**: Siehe `.github/README.md` für vollständige Dokumentation
 
-1. Kopieren Sie `templates/widget-template.dart` für neue Widgets
+### 5. Mit Flutter-Entwicklung beginnen
+
+1. Nutzen Sie die vorhandenen `templates/` für neue Widgets und Screens
 2. Verwenden Sie `@workspace` um Flutter-Features zu analysieren
 3. Lassen Sie den Agent Flutter-Implementierungspläne erstellen
-4. Nutzen Sie Hot Reload für schnelle Iteration
+4. Nutzen Sie Hot Reload für schnelle Iteration (`flutter run`)
+5. Instructions werden automatisch basierend auf Datei-Kontext angewendet
+6. Referenzieren Sie die Beispiele in `examples/` für bewährte Patterns
+
+## 🎯 GitHub Copilot Instructions Struktur
+
+### Neue VS Code-konforme Organisation
+
+Dieses Template verwendet die **offizielle GitHub Copilot Instructions Struktur** basierend auf der [VS Code Dokumentation](https://code.visualstudio.com/docs/copilot/copilot-customization):
+
+#### Automatische Instructions
+
+- **`.github/copilot-instructions.md`** - Haupt-Instructions für alle Flutter-Projekte
+- **Automatische Erkennung** durch VS Code ohne zusätzliche Konfiguration
+- **Cross-Platform Support** für VS Code, Visual Studio und GitHub.com
+
+#### Spezialisierte Instructions (applyTo-Patterns)
+
+- **`widget-development.instructions.md`** → Gilt für `lib/**/*.dart` (UI-Entwicklung)
+- **`testing.instructions.md`** → Gilt für `test/**/*.dart` (Test-Entwicklung)
+- **`security.instructions.md`** → Gilt für `lib/**/*.dart` (Security-Guidelines)
+- **`performance-deployment.instructions.md`** → Gilt für alle Dateien (Performance & CI/CD)
+
+#### Vorteile für Context Engineering
+
+- **🎯 Intelligente Anwendung**: Instructions werden nur für relevante Dateien geladen
+- **📝 Modulare Organisation**: Trennung nach Fachbereichen für bessere Wartbarkeit
+- **🔄 Referenzierung**: Instructions können sich gegenseitig referenzieren
+- **👥 Team-Kollaboration**: Versioniert, dokumentiert und einfach erweiterbar
 
 ## 🔧 MCP Server Integration für Flutter
 
@@ -144,6 +185,31 @@ Vollständige Liste in [`docs/MCP_SERVERS.md`](docs/MCP_SERVERS.md)
 
 ## 🎯 Flutter-optimierte Agent-Workflows
 
+### GitHub Copilot Chat-Modi für Flutter
+
+- **`@workspace`** - Flutter App-weite Fragen und Architektur-Analyse
+- **`@terminal`** - Flutter CLI-Kommandos und Build-Prozesse  
+- **`@vscode`** - Flutter Extension spezifische Hilfe und Konfiguration
+
+### Intelligente Instructions-Anwendung
+
+Die Instructions werden **automatisch** basierend auf Ihrem Arbeitskontext angewendet:
+
+#### Beim Arbeiten in `lib/` Dateien
+
+- ✅ **widget-development.instructions.md** → Widget-Patterns, State Management
+- ✅ **security.instructions.md** → Sichere Entwicklungspraktiken
+- ✅ **copilot-instructions.md** → Grundlegende Flutter-Prinzipien
+
+#### Beim Arbeiten in `test/` Dateien
+
+- ✅ **testing.instructions.md** → Test-Strategien und Widget Tests
+- ✅ **copilot-instructions.md** → Grundlegende Flutter-Prinzipien
+
+#### Bei CI/CD und Performance-Fragen
+
+- ✅ **performance-deployment.instructions.md** → Build-Optimierung, Analytics
+
 ### Flutter Widget-Entwicklung Workflow
 
 1. **Widget-Analyse**: `@workspace` analysiert UI-Anforderungen
@@ -177,14 +243,16 @@ Vollständige Liste in [`docs/MCP_SERVERS.md`](docs/MCP_SERVERS.md)
 - **Performance optimieren**: Widget-Rebuilds minimieren, Lazy Loading
 - **Testing integrieren**: Unit Tests, Widget Tests, Integration Tests
 - **Platform Features nutzen**: Native iOS/Android Funktionalität über Plugins
+- **Instructions-Struktur nutzen**: Modulare Organization für bessere Wartbarkeit
 
 ### Flutter Agent-Interaktion Tipps
 
-- Nutzen Sie Flutter-spezifische Agent-Modi (`@workspace` für Widgets)
-- Geben Sie Kontext über Flutter Version und Ziel-Plattformen
-- Verwenden Sie die Flutter-Beispiele im `examples/widgets/` Ordner
-- Referenzieren Sie Flutter-Dokumentation und pub.dev Packages
-- Bitten Sie um plattform-spezifische Implementierungen (iOS/Android)
+- **Kontext-bewusst arbeiten**: Instructions werden automatisch für relevante Dateien angewendet
+- **Spezifische Referenzen**: "Befolge die Widget Development Instructions"
+- **Flutter-Kontext geben**: Flutter Version und Ziel-Plattformen erwähnen
+- **Beispiele nutzen**: Referenzieren Sie Flutter-Beispiele im `examples/` Ordner
+- **Modulare Instructions**: Nutzen Sie spezialisierte Instructions für verschiedene Aufgaben
+- **applyTo-Patterns**: Verstehen Sie, welche Instructions für welche Dateien gelten
 
 ## 📚 Flutter-spezifische Ressourcen
 
@@ -229,6 +297,27 @@ Vollständige Liste in [`docs/MCP_SERVERS.md`](docs/MCP_SERVERS.md)
 - [iOS Deployment](https://flutter.dev/docs/deployment/ios) - Apple App Store
 - [Web Deployment](https://flutter.dev/docs/deployment/web) - Web-Apps mit Flutter
 - [CI/CD with GitHub Actions](https://flutter.dev/docs/deployment/cd) - Kontinuierliche Bereitstellung
+
+## 🚀 Was ist neu in dieser Version?
+
+### ✨ GitHub Copilot Instructions Optimierung (v2.0)
+
+- **🎯 VS Code Standard-Konformität**: Migration zu `.github/copilot-instructions.md`
+- **📁 Modulare Instructions-Struktur**: Aufgeteilte Instructions nach Fachbereichen
+- **🔧 Intelligente Anwendung**: `applyTo`-Patterns für spezifische Dateitypen
+- **⚡ Bessere Performance**: Selektives Laden relevanter Instructions
+- **👥 Team-Kollaboration**: Versionierte und dokumentierte Instructions
+
+### 🔄 Migration von Legacy-Struktur
+
+Die ursprüngliche `.copilot/custom-instructions.md` wurde optimiert zu:
+
+- **Automatische Erkennung** durch VS Code
+- **Spezialisierte Instructions** für Widgets, Testing, Security, Performance
+- **Front Matter Support** für Metadata und Scope-Kontrolle
+- **Cross-Platform Unterstützung** für VS Code, Visual Studio, GitHub.com
+
+Vollständige Details zur neuen Struktur finden Sie in [`.github/README.md`](.github/README.md).
 
 ## 🤝 Contributing
 

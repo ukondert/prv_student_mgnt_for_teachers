@@ -27,8 +27,14 @@ Hier werden Quellen angeführt, deren Features hier verwendet wurden.
 
 - GitHub Copilot Best Practices und Anwendungsmuster
 - Community-erprobte Workflows und Konfigurationen
-- Agent-spezifische Nutzungsmuster (`@workspace`, `@terminal`, etc.)
+- Native Agent-spezifische Nutzungsmuster (`@workspace`, `@terminal`, `@vscode`)
 - VS Code Extension Integration Patterns
+- Community Chatmodes für spezielle Anwendungsfälle:
+  - **PRD Chatmode** - Product Requirements Documents
+  - **Specification Chatmode** - Technische Spezifikationen
+  - **Implementation Plan Chatmode** - Implementierungspläne
+  - **Accessibility Chatmode** - WCAG-konforme Entwicklung
+  - **Simple App Idea Generator** - Ideenfindung
 - Produktivitäts-optimierte Entwicklungsstrategien
 
 **Inspiration für:**

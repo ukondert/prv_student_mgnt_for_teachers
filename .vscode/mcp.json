@@ -1,0 +1,59 @@
+{
+	"servers": {
+		"filesystem": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-filesystem",
+				"${workspaceFolder}"
+			],
+			"type": "stdio"
+		},
+		"memory": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-memory"
+			],
+			"type": "stdio"
+		},
+		"Ref": {
+			"command": "npx",
+			"args": [
+				"ref-tools-mcp@latest"
+			],
+			"env": {
+				"REF_API_KEY": "ref-beed9e1711b0f9e0c9c3"
+			},
+			"type": "stdio"
+		},
+		"semgrep": {
+			"command": "uvx",
+			"args": [
+				"semgrep-mcp"
+			],
+			"env": {
+				"SEMGREP_APP_TOKEN": "c6f6c8dfc492f89783804bb59ddc329d5f9fd59e3355a3bc68fbdd9b4f02ab28"
+			},
+			"type": "stdio"
+		},
+		"exa": {
+			"command": "npx",
+			"args": [
+				"-y",
+				"mcp-remote",
+				"https://mcp.exa.ai/mcp?exaApiKey=e4909823-78d8-48e3-a7f2-5ed630a80d68"
+			],
+			"type": "stdio"
+		},
+		"playwright": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"@playwright/mcp@latest"
+			],
+			"gallery": true
+		}
+	},
+	"inputs": []
+}

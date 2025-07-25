@@ -1,6 +1,22 @@
-# Flutter-spezifische Workflows für Context Engineering
+# Flutter-spezifische Workflows für GitHub Copilot
 
-## 🚀 Flutter-Entwicklung Workflows
+## 🚀 Flutter-Entwicklung Workflows mit GitHub Copilot Chatmodes
+
+### 🎯 Verfügbare GitHub Copilot Chatmodes für Flutter
+
+Dieses Template nutzt GitHub Copilot's native Chatmodes und erweiterte Community Chatmodes:
+
+**Native GitHub Copilot Chatmodes:**
+- `@workspace` - Flutter App-weite Kontext-Fragen und Projektanalyse
+- `@terminal` - Flutter CLI-Kommandos und Build-Prozesse
+- `@vscode` - Flutter Extension spezifische Hilfe
+
+**Community Chatmodes (aus awesome-copilot):**
+- **PRD Chatmode** - Erstelle Product Requirements Documents für Flutter Features
+- **Feature Request Chatmode** - Strukturiere Feature-Anforderungen (bereits implementiert)
+- **Specification Chatmode** - Detaillierte technische Spezifikationen
+- **Implementation Plan Chatmode** - Schritt-für-Schritt Implementierungspläne
+- **Accessibility Chatmode** - WCAG-konforme Flutter UI-Entwicklung
 
 ### Flutter Widget-Entwicklung Workflow
 
@@ -13,11 +29,11 @@ Der Agent analysiert:
 - Bestehende Design-Patterns im Projekt
 - Material Design 3 Guidelines
 - Theme-Integration
-- Accessibility-Anforderungen
+- Accessibility-Anforderungen (mit Accessibility Chatmode)
 
 **Schritt 2: Widget-Struktur planen**
 ```dart
-// Agent erstellt Struktur-Vorschlag
+// Agent erstellt Struktur-Vorschlag mit GitHub Copilot
 class MyCustomWidget extends StatelessWidget {
   const MyCustomWidget({
     super.key,
@@ -35,11 +51,12 @@ class MyCustomWidget extends StatelessWidget {
 - Responsive Design für verschiedene Screen-Größen
 - Widget Tests für verschiedene States
 - Integration Tests für User-Interaktionen
+- Accessibility-Tests (WCAG 2.1 Compliance)
 
-**MCP Server Integration:**
-- Design System APIs für Farben und Spacing
-- Figma MCP für Design Assets
-- Testing MCP für automatische Test-Generierung
+**GitHub Copilot Integration:**
+- `@workspace` für Widget-Pattern Analyse
+- `@terminal` für Flutter Test-Kommandos
+- **Accessibility Chatmode** für barrierefreie UI-Komponenten
 
 ### Flutter App-Architektur Workflow
 
@@ -120,74 +137,65 @@ class ApiService {
 - Integration mit GitHub Issues
 - Metriken und Erfolgskriterien
 
-**Typische Anwendungsfälle:**
+### GitHub Copilot Chat Workflows für Flutter
 
-```bash
-@prd Erstelle PRD für Mobile App Redesign
-@prd Definiere Produktanforderungen für E-Commerce Platform
-@prd Plane Product Roadmap für Q1 2025
+**Native GitHub Copilot Chat:**
+
+- `@workspace` - Flutter App-weite Kontext-Fragen und Projektanalyse
+- `@terminal` - Flutter CLI-Kommandos und Build-Prozesse  
+- `@vscode` - Flutter Extension spezifische Hilfe
+
+**Bereitgestellte Community Chatmodes:**
+
+- **PRD Chatmode** - Product Requirements Documents für Flutter Features
+- **Specification Chatmode** - Detaillierte technische Spezifikationen
+- **Implementation Plan Chatmode** - Schritt-für-Schritt Implementierungspläne
+- **Accessibility Chatmode** - WCAG-konforme Flutter UI-Entwicklung
+- **Simple App Idea Generator** - Brainstorming für Flutter App-Ideen
+
+### Flutter Feature-Entwicklung Workflow
+
+**Schritt 1: Idee entwickeln (mit Community Chatmode)**
+
+```
+Simple App Idea Generator: Brainstorme neue Flutter App-Idee
 ```
 
-### Kombinierte Workflows
+**Schritt 2: Anforderungen dokumentieren (mit Community Chatmode)**
 
-#### Feature-to-Product Pipeline
-
-```bash
-1. @feature-request Erstelle initialen Feature Request
-2. @prd Erweitere zu vollständigem PRD
-3. @workspace Implementiere basierend auf PRD
+```
+PRD Chatmode: Erstelle Product Requirements Document
 ```
 
-#### Iterative Produktentwicklung
+**Schritt 3: Technische Spezifikation (mit Community Chatmode)**
 
-```bash
-1. @prd Erstelle MVP-PRD
-2. @feature-request Definiere Phase 2 Features
-3. @workspace Validiere technische Machbarkeit
-4. @prd Aktualisiere PRD mit neuen Erkenntnissen
+```
+Specification Chatmode: Erstelle detaillierte technische Spezifikation
 ```
 
-#### Requirements Engineering Workflow
+**Schritt 4: Implementierungsplan (mit Community Chatmode)**
 
-```bash
-1. @feature-request Sammle initiale Anforderungen
-2. @prd Konsolidiere zu Produktspezifikation
-3. @workspace Erstelle Implementierungsplan
-4. GitHub Issues werden automatisch generiert
+```
+Implementation Plan Chatmode: Generiere Schritt-für-Schritt Plan
 ```
 
-### Integration mit bestehenden Workflows
+**Schritt 5: Flutter-spezifische Implementierung (mit nativen Copilot Chat)**
 
-#### Feature Development mit Chatmodes
-
-**Erweiterte Feature-Entwicklung:**
-
-```bash
-# Phase 1: Anforderungsanalyse
-@feature-request Erstelle Feature Request für [Feature-Name]
-
-# Phase 2: Produktspezifikation  
-@prd Erweitere Feature Request zu vollständigem PRD
-
-# Phase 3: Implementation Planning
-@workspace Analysiere aktuelle Projektstruktur
-@workspace Zeige verfügbare MCP Server für [Feature-Typ]
-@workspace Erstelle Implementierungsplan basierend auf docs/PATTERNS.md
-
-# Phase 4: Development
-@workspace Implementiere Service-Layer mit MCP Integration
-@workspace Erstelle Tests basierend auf examples/testing/
-@workspace Aktualisiere Dokumentation
+```
+@workspace Analysiere aktuelle Flutter-Projektstruktur
+@workspace Implementiere Widget basierend auf Spezifikation
+@terminal flutter test - Führe Tests aus
+@vscode Konfiguriere Flutter Extension Settings
 ```
 
 #### Quality Assurance Pipeline
 
-**Automatisierte QA mit Chatmodes:**
+**Automatisierte QA mit GitHub Copilot:**
 
 ```bash
 # Requirements Validation
-@feature-request Validiere Vollständigkeit der Anforderungen
-@prd Überprüfe User Stories auf Testbarkeit
+@workspace Validiere Vollständigkeit der Anforderungen
+@workspace Überprüfe User Stories auf Testbarkeit
 
 # Implementation Review  
 @workspace Prüfe Code gegen AGENT_RULES.md
@@ -204,15 +212,14 @@ class ApiService {
 
 **Kontext-Management:**
 
-- Nutze `@feature-request` für initiale Anforderungserfassung
-- Verwende `@prd` für umfassende Produktdokumentation  
-- Kombiniere mit `@workspace` für technische Implementierung
+- Nutze GitHub Copilot Community Chatmodes für spezielle Anforderungen
+- Verwende native `@workspace` für technische Implementierung
 - Referenziere spezifische Template-Dateien für konsistente Ausgaben
 
 **Effizienz-Tipps:**
 
-- Starte immer mit dem spezifischsten Chatmode (feature-request vs. prd)
-- Nutze die automatische GitHub Issues-Erstellung des PRD-Chatmodes
+- Starte mit dem spezifischsten Chatmode für deine Aufgabe
+- Nutze die automatische GitHub Issues-Erstellung verfügbarer Chatmodes
 - Integriere MCP Server-Empfehlungen in die Implementierungsplanung
 - Dokumentiere Entscheidungen direkt in den generierten Dokumenten
 
