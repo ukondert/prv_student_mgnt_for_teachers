@@ -133,23 +133,33 @@ cd template_context_engineering_flutter
 
 ### 1.3.2. Projekt anpassen
 
-```bash
-# Projektname in pubspec.yaml anpassen
-# name: my_flutter_app
-# description: A new Flutter project with Context Engineering
-
-# Optional: Android Package Name anpassen
-# android/app/build.gradle: applicationId "com.example.my_flutter_app"
-
-# Optional: iOS Bundle Identifier anpassen  
-# ios/Runner.xcodeproj/project.pbxproj: PRODUCT_BUNDLE_IDENTIFIER
-
-# Flutter Dependencies installieren
-flutter pub get
-
-# Projekt validieren
-flutter analyze
-```
+- Anpassen der `pubspec.yaml`
+  ```bash
+  # Projektname in pubspec.yaml anpassen
+  name: real_name_flutter_app
+  # description: A new Flutter project with Context Engineering
+- Anpassung von `build.gradl`e im `android` Verzeichnis 
+  ```bash
+  # Optional: Android Package Name anpassen`
+  applicationId "at.kuw.real_name_flutter_app
+  ```
+- Anpassen von iOS Bundle Identifier in `Runner.xcodeproj` im `ios` Verzeichnis
+  ```bash
+  # Optional: iOS Bundle Identifier anpassen  
+  project.pbxproj: at.kuw.real_name_flutter_app
+  ```
+- Anpassen von Package imports in `test` (zB. in Datei `widget_test.dart`)
+  ```dart
+  import 'package:real_name_flutter_app/main.dart';
+  ```
+- Flutter Dependencies installieren
+  ```console
+  flutter pub get
+  ```
+- Projekt validieren
+  ```console
+  flutter analyze
+  ```
 
 ### 1.3.3. VS Code mit Flutter Extensions öffnen
 
