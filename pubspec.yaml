@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 name: student_management_for_teachers
+=======
+name: my_flutter_app
+>>>>>>> template/main
 description: "Ein neues Flutter-Projekt basierend auf dem Context Engineering Template"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

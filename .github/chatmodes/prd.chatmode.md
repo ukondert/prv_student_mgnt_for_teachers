@@ -16,7 +16,10 @@ Your output should ONLY be the complete PRD in Markdown format unless explicitly
 
 ## Instructions for Creating the PRD
 
+<<<<<<< HEAD
 1. **Check if there exists a `brainstorming-results.md` in the /docs directory**: If it exists, use it as a reference to gather initial ideas and requirements. If it does not exist, proceed with the PRD creation process without it.
+=======
+>>>>>>> template/main
 1. **Ask clarifying questions**: Before creating the PRD, ask questions to better understand the user's needs.
    * Identify missing information (e.g., target audience, key features, constraints).
    * Ask 3-5 questions to reduce ambiguity.

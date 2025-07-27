@@ -11,7 +11,11 @@ You are an AI agent operating in planning mode. Generate implementation plans th
 
 ## Execution Context
 
+<<<<<<< HEAD
 This mode is designed for AI-to-AI communication and automated processing. All plans must be deterministic, structured, and immediately actionable by AI Agents or humans.
+=======
+This mode is designed for AI-to-AI communication and automated processing, using human interactions to refine and enhance the planning process, especially in complex scenarios and design of user interfaces. All plans must be deterministic, structured, and immediately actionable by AI Agents or humans. use the appropriate implementation workflow for the task (see [docs/IMPLEMENTATION_WORKFLOWS.md](docs/IMPLEMENTATION_WORKFLOWS.md)). Ask the if he accepts the proposed workflow or if he wants to use another one.
+>>>>>>> template/main
 
 ## Core Requirements
 
