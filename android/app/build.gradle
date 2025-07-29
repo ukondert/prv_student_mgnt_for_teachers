@@ -1,9 +1,5 @@
 plugins {
-<<<<<<< HEAD
-    id "at.kuw.student_management_for_teachers.flutter_plugin"
-=======
     id "com.android.application"
->>>>>>> template/main
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"

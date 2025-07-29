@@ -1,0 +1,34 @@
+{
+  "responsive-design": {
+    "tools": [
+      "codebase",
+      "search", 
+      "usages",
+      "findTestFiles",
+      "problems",
+      "fetch"
+    ],
+    "description": "Tools for responsive UI development and cross-platform optimization",
+    "icon": "device-mobile"
+  },
+  "ui-analysis": {
+    "tools": [
+      "codebase",
+      "search",
+      "usages", 
+      "problems"
+    ],
+    "description": "Analyze UI components for responsive design improvements",
+    "icon": "search"
+  },
+  "performance-check": {
+    "tools": [
+      "codebase",
+      "findTestFiles",
+      "problems",
+      "search"
+    ],
+    "description": "Performance analysis tools for cross-platform apps",
+    "icon": "pulse"
+  }
+}

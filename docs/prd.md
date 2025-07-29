@@ -1,401 +1,256 @@
-# PRD: Student Management App for Teachers
+## PRD: Lehrer-Cockpit
 
 ## 1. Product overview
 
 ### 1.1 Document title and version
 
-* PRD: Student Management App for Teachers
-* Version: 1.0
+1. PRD: Lehrer-Cockpit
+2. Version: 1.0
 
 ### 1.2 Product summary
 
-Diese Student Management App ist eine umfassende Lösung für Lehrer zur effizienten Verwaltung von Schülerdaten, Leistungsbeurteilungen und statistischen Auswertungen. Die App verfolgt einen local-first Ansatz mit Cloud-Synchronisation und bietet sowohl eine Desktop- als auch Mobile-Anwendung basierend auf Flutter für eine einheitliche Benutzererfahrung.
+1. Das "Lehrer-Cockpit" ist eine für Lehrer an Höheren Technischen Lehranstalten (HTL) konzipierte Flutter-Anwendung. Ihr Hauptzweck ist die Vereinfachung und Digitalisierung der Schülerleistungsverwaltung. Die App ermöglicht es Lehrkräften, verschiedenste Leistungsarten – von der schnellen Protokollierung mündlicher Mitarbeit im Unterricht bis hin zur strukturierten Beurteilung komplexer technischer Projekte – effizient zu erfassen und zu verwalten.
 
-Die Lösung ermöglicht es Lehrern, ihre Schüler systematisch zu organisieren, Leistungen zu bewerten, Noten zu verwalten und aussagekräftige Analysen über individuelle und klassenweite Leistungen zu erstellen. Durch die plattformübergreifende Verfügbarkeit können Lehrer flexibel zwischen verschiedenen Geräten wechseln, während ihre Daten sicher und konsistent bleiben.
+2. Ein zentrales Merkmal ist der "Local-First"-Ansatz, bei dem alle Daten primär auf den Geräten des Nutzers gespeichert werden, um volle Offline-Fähigkeit und maximalen Datenschutz zu gewährleisten. Die Synchronisation zwischen Geräten (z.B. Tablet und Laptop) erfolgt standardmäßig über eine direkte Bluetooth-Verbindung. Eine optionale, Ende-zu-Ende-verschlüsselte Cloud-Synchronisation kann als Premium-Funktion hinzugefügt werden.
 
 ## 2. Goals
 
 ### 2.1 Business goals
 
-* Reduzierung des administrativen Aufwands für Lehrer um mindestens 40%
-* Verbesserung der Qualität von Leistungsbeurteilungen durch strukturierte Bewertungssysteme
-* Steigerung der Effizienz bei der Notenerfassung und -verwaltung
-* Bereitstellung datengestützter Einblicke für bessere pädagogische Entscheidungen
-* Etablierung als führende Lösung für digitale Schülerverwaltung im deutschsprachigen Raum
+1.  **Markteinführung:** Erfolgreiche Einführung einer kaufbaren Basisversion der App in den gängigen App Stores (Apple App Store, Google Play Store, Microsoft Store) innerhalb der nächsten 9 Monate.
+2.  **Monetarisierung:** Etablierung eines optionalen Abonnement-Modells für Premium-Funktionen wie die Cloud-Synchronisation, um wiederkehrende Einnahmen zu generieren.
+3.  **Kundenbindung:** Erreichen einer hohen Benutzerzufriedenheit (durchschnittlich >4.5 Sterne), um eine starke Basis für Mundpropaganda im Bildungssektor zu schaffen.
 
 ### 2.2 User goals
 
-* Zentrale Verwaltung aller Schülerdaten und Leistungen an einem Ort
-* Schnelle und intuitive Erfassung von Noten und Bewertungen
-* Flexible Gestaltung von Bewertungskonzepten für verschiedene Fächer
-* Automatische Berechnung und Visualisierung von Leistungsstatistiken
-* Nahtlose Synchronisation zwischen Desktop- und Mobile-Geräten
-* Offline-Funktionalität für unterbrechungsfreies Arbeiten
+1.  **Zeitersparnis:** Den administrativen Aufwand für die Notenverwaltung im Vergleich zu analogen oder Excel-basierten Methoden signifikant reduzieren.
+2.  **Objektivität & Transparenz:** Eine klare, nachvollziehbare und faire Grundlage für die Notengebung durch anpassbare Beurteilungskonzepte und Rubriken schaffen.
+3.  **Flexibilität & Kontrolle:** Jederzeit und überall – auch offline – auf alle relevanten Leistungsdaten zugreifen und die volle Kontrolle über die eigenen Daten behalten.
+4.  **Fokussierung:** Den Unterrichtsfluss so wenig wie möglich stören, indem Leistungen schnell und intuitiv erfasst werden können.
 
 ### 2.3 Non-goals
 
-* Komplette Schulverwaltungssoftware mit Stundenplanung oder Ressourcenverwaltung
-* Direkte Kommunikation zwischen Lehrern, Schülern oder Eltern
-* Integration in bestehende Schulverwaltungssysteme (erste Version)
-* Verwaltung von Hausaufgaben oder Unterrichtsmaterialien
-* Anwesenheitsverfolgung oder Verhaltensprotokollierung
+1.  **Schulverwaltungssystem:** Die App ist kein Ersatz für offizielle Schulverwaltungssysteme (wie Sokrates, Untis etc.). Sie dient der persönlichen Arbeitserleichterung des Lehrers. Ein Daten-Import/-Export ist für V1 nicht geplant.
+2.  **Kommunikationsplattform:** Die App wird keine Chat- oder Kommunikationsfunktionen zwischen Lehrern, Schülern oder Eltern enthalten.
+3.  **Stunden- und Vertretungsplanung:** Diese Funktionen sind explizit nicht Teil des Funktionsumfangs.
+4.  **Anwesenheitsverwaltung:** Eine detaillierte Anwesenheitskontrolle ist für die erste Version nicht vorgesehen.
 
 ## 3. User personas
 
 ### 3.1 Key user types
 
-* Grundschullehrer (Klassenlehrermodell)
-* Fachlehrer weiterführende Schulen (mehrere Klassen/Fächer)
-* Berufsschullehrer (projektorientierte Bewertung)
-* Privatlehrer/Nachhilfelehrer
+1.  **HTL-Lehrer/in:** Die primäre und einzige Nutzergruppe. Sie unterrichtet sowohl theoretische als auch praktische Fächer und benötigt ein Werkzeug, das dieser Vielfalt gerecht wird.
 
 ### 3.2 Basic persona details
 
-* **Maria (Grundschullehrerin)**: Unterrichtet eine 3. Klasse mit 24 Schülern in allen Hauptfächern. Benötigt einfache Bewertungssysteme und Überblick über die Gesamtentwicklung ihrer Schüler.
-
-* **Thomas (Gymnasiallehrer)**: Unterrichtet Mathematik und Physik in 5 verschiedenen Klassen mit insgesamt 120 Schülern. Braucht effiziente Notenerfassung und fachspezifische Auswertungen.
-
-* **Sarah (Berufsschullehrerin)**: Bewertet hauptsächlich Projekte und praktische Arbeiten. Benötigt flexible Bewertungskriterien und kompetenzbasierte Beurteilungen.
+1.  **DI Peter "Peda" Maier**: Ein 45-jähriger, technikaffiner Lehrer für Softwareentwicklung und Netzwerktechnik an einer HTL. Er ist frustriert von der Zettelwirtschaft und unübersichtlichen Excel-Tabellen. Er sucht eine schnelle, datenschutzkonforme Lösung, die ihm hilft, seine vielfältigen Beurteilungen (Mitarbeit, Tests, Programmierprojekte) fair und effizient zu verwalten, ohne dafür auf eine Cloud angewiesen zu sein.
 
 ### 3.3 Role-based access
 
-* **Einzellehrer**: Vollzugriff auf eigene Klassen und Daten, keine Berechtigung für andere Lehrerdaten
-* **Zukünftige Administratorrolle**: Überblick über schulweite Statistiken (nicht in v1.0)
+1.  **Lehrer**: Es gibt nur eine Benutzerrolle. Der Lehrer hat vollen Lese- und Schreibzugriff auf alle von ihm erstellten Daten (Klassen, Schüler, Leistungen). Es gibt keine geteilten Daten zwischen verschiedenen Lehrern.
 
-## 4. Functional requirements
+## 4. Functional Requirements
 
-* **Schülerverwaltung** (Priority: High)
-  * Erfassung von Schülerstammdaten (Name, Geburtsdatum, Kontaktdaten)
-  * Organisation von Schülern in Klassen und Gruppen
-  * Import/Export von Schülerlisten
-  * Suchfunktion und Filterung
+1.  **ID**: FR-1
+    *   **Feature**: Lokale Datenspeicherung (Local-First)
+    *   **Priority**: Hoch
+    *   **Description**: Alle Anwendungsdaten müssen standardmäßig auf dem Gerät des Benutzers in einer lokalen Datenbank gespeichert werden. Die App muss vollständig offline funktionsfähig sein.
+2.  **ID**: FR-2
+    *   **Feature**: Bluetooth-Synchronisation
+    *   **Priority**: Hoch
+    *   **Description**: Die App muss eine manuelle Synchronisation von Daten zwischen zwei Geräten desselben Benutzers über eine direkte Bluetooth-Verbindung ermöglichen. Ein Mechanismus zur Konfliktlösung (z.B. Last-Write-Wins) ist erforderlich.
+3.  **ID**: FR-3
+    *   **Feature**: Stammdatenverwaltung
+    *   **Priority**: Hoch
+    *   **Description**: Benutzer müssen Klassen, Fächer und Schüler anlegen und verwalten können. Schülerdaten umfassen Vor-/Nachname, E-Mail, optionales Foto sowie Kontaktdaten der Eltern und allgemeine Anmerkungen.
+4.  **ID**: FR-4
+    *   **Feature**: Verwaltung von Beurteilungskonzepten
+    *   **Priority**: Hoch
+    *   **Description**: Benutzer müssen Vorlagen für Beurteilungskonzepte erstellen können. Eine Vorlage definiert Leistungskategorien (z.B. Mitarbeit, Tests) und deren prozentuale Gewichtung an der Gesamtnote. Diese Konzepte können Fächern für unterschiedliche Klassen zugewiesen werden. (z.B. POS - 4. Klasse)
+5.  **ID**: FR-5
+    *   **Feature**: Schnellerfassung von Leistungen
+    *   **Priority**: Hoch
+    *   **Description**: In einer für Mobilgeräte optimierten Ansicht muss die mündliche Mitarbeit per einfachem Klick ("+1") und eine mündliche Wiederholung über ein Menü mit Notenauswahl (1-5) erfassbar sein.
+6.  **ID**: FR-6
+    *   **Feature**: Strukturierte Leistungsbeurteilung mit Rubriken
+    *   **Priority**: Hoch
+    *   **Description**: Benutzer müssen Vorlagen für Beurteilungsrubriken (z.B. für Projekte) mit gewichteten Kriterien erstellen können. Eine Leistung kann dann anhand dieser Rubrik mit Noten und Kommentaren pro Kriterium bewertet werden.
+7.  **ID**: FR-7
+    *   **Feature**: Notenberechnung
+    *   **Priority**: Hoch
+    *   **Description**: Die App muss basierend auf den erfassten Leistungen und dem zugewiesenen Beurteilungskonzept eine gewichtete Durchschnittsnote für jeden Schüler berechnen und einen Notenvorschlag anzeigen.
 
-* **Klassenverwaltung** (Priority: High)
-  * Erstellung und Verwaltung von Klassen
-  * Zuordnung von Schülern zu Klassen
-  * Klassenübergreifende Ansichten
-  * Archivierung abgeschlossener Klassen
+## 5. Non-Functional Requirements
 
-* **Leistungsbeurteilungskonzepte** (Priority: High)
-  * Erstellung fachspezifischer Bewertungssysteme
-  * Konfiguration von Notenskalen (1-6, Punkte, Prozent, Kompetenzstufen)
-  * Gewichtung verschiedener Leistungsbereiche
-  * Templates für häufig verwendete Bewertungskonzepte
+### 5.1 User Experience Requirements
 
-* **Mitarbeitsprotokollierung** (Priority: High)
-  * Schnelle Erfassung der Mitarbeit während des Unterrichts
-  * Kategorisierung (mündliche Mitarbeit, Hausaufgaben, Verhalten)
-  * Zeitstempel und Notizen
-  * Batch-Eingabe für ganze Klassen
+1.  **ID**: UX-1
+    *   **Requirement**: Reaktionsfähigkeit
+    *   **Description**: Alle UI-Interaktionen, insbesondere die Schnellerfassung, müssen ohne spürbare Verzögerung (<200ms) erfolgen. Die App muss sich flüssig anfühlen.
+2.  **ID**: UX-2
+    *   **Requirement**: Kontextoptimierte Ansichten
+    *   **Description**: Die App muss erkennen, auf welchem Gerätetyp sie läuft, und eine passende UI bereitstellen (z.B. Listenansicht auf dem Smartphone, mehrspaltige Layouts auf dem Desktop).
 
-* **Notenerfassung** (Priority: High)
-  * Eingabe von Noten für Tests, Klassenarbeiten, Projekte
-  * Verschiedene Bewertungstypen (schriftlich, mündlich, praktisch)
-  * Datum und Thema der Leistung
-  * Anhänge und Kommentare
+### 5.2 UI Requirements
 
-* **Statistische Auswertungen** (Priority: High)
-  * Individuelle Schüleranalysen (Leistungsentwicklung, Stärken/Schwächen)
-  * Klassenstatistiken (Durchschnitt, Verteilung, Trends)
-  * Fachübergreifende Analysen
-  * Exportfunktionen für Berichte
+1.  **ID**: UI-1
+    *   **Requirement**: Responsives Design
+    *   **Description**: Das Layout muss sich an alle Ziel-Bildschirmgrößen anpassen, von kleinen Smartphones bis zu großen Desktop-Monitoren.
+2.  **ID**: UI-2
+    *   **Requirement**: Plattformkonformität
+    *   **Description**: Die App soll die Design-Prinzipien von Material Design (Android/Windows) und Cupertino (iOS/macOS) respektieren, um sich nativ anzufühlen.
 
-* **Datensynchronisation** (Priority: High)
-  * Local-first Datenhaltung mit SQLite
-  * Cloud-Backup und Synchronisation
-  * Offline-Funktionalität
-  * Konfliktauflösung bei parallelen Änderungen
+### 5.3 Advanced Features
 
-## 5. User experience
-
-### 5.1 Entry points & first-time user flow
-
-* Onboarding mit Erstellung des ersten Bewertungskonzepts
-* Import-Assistent für bestehende Schülerlisten
-* Tutorial für grundlegende Funktionen
-* Setup der Cloud-Synchronisation (optional)
-
-### 5.2 Core experience
-
-* **Dashboard**: Übersicht über aktuelle Klassen, anstehende Bewertungen und Benachrichtigungen
-  * Bietet schnellen Zugriff auf die wichtigsten Funktionen und einen Überblick über den aktuellen Status
-
-* **Schnelle Notenerfassung**: Optimierte Eingabe für häufige Bewertungen
-  * Mobile-optimierte Eingabe ermöglicht Bewertungen direkt im Unterricht
-
-* **Intelligente Analyse**: Automatische Erkennung von Leistungsmustern und Trends
-  * Hilft Lehrern, frühzeitig auf Leistungsveränderungen zu reagieren
-
-### 5.3 Advanced features & edge cases
-
-* Behandlung von Schülerwechseln zwischen Klassen
-* Umgang mit verschiedenen Bewertungssystemen in einer Klasse
-* Backup und Wiederherstellung bei Gerätewechsel
-* Datenschutz-konforme Archivierung
-
-### 5.4 UI/UX highlights
-
-* Material Design 3 für intuitive Bedienung
-* Responsive Layout für verschiedene Bildschirmgrößen
-* Dunkler Modus für längere Nutzung
-* Barrierefreie Gestaltung (Accessibility)
-* Offline-Indikatoren und Synchronisationsstatus
+1.  **ID**: AF-1
+    *   **Feature**: Optionale Cloud-Synchronisation
+    *   **Description**: Als Opt-in-Funktion (Abonnement) kann der Benutzer eine Ende-zu-Ende-verschlüsselte Cloud-Synchronisation aktivieren, um Daten über das Internet zu sichern und abzugleichen.
 
 ## 6. Narrative
 
-Ein Lehrer startet seinen Tag mit einem Blick auf das Dashboard der App, wo er eine Übersicht über seine Klassen und anstehende Bewertungen sieht. Während des Unterrichts kann er mit der Mobile-App schnell die Mitarbeit der Schüler erfassen. Nach einer Klassenarbeit gibt er die Noten über die Desktop-App ein und erstellt automatisch eine statistische Auswertung. Die App synchronisiert alle Daten nahtlos zwischen seinen Geräten und erstellt zum Elternsprechtag aussagekräftige Berichte über die Leistungsentwicklung jedes Schülers.
+DI Peter Maier beginnt seine Unterrichtsstunde in "Softwareentwicklung" mit der 4AHITS. Er öffnet das Lehrer-Cockpit auf seinem Tablet. Als ein Schüler eine brillante Frage stellt, tippt Peter neben dessen Namen auf den "+1"-Button, um die Mitarbeit zu protokollieren. Später, bei einer mündlichen Wiederholung, öffnet er per langem Druck das Menü und vergibt eine "2". In der Pause synchronisiert er sein Tablet via Bluetooth mit seinem Laptop im Kabinett. Am Nachmittag nutzt er die Desktop-App, um die eingereichten Softwareprojekte anhand seiner vordefinierten Rubrik ("Planung", "Umsetzung", "Doku") fair zu bewerten. Vor der Notenkonferenz wirft er einen Blick auf die automatisch berechneten Gesamtnoten und fühlt sich bestens vorbereitet.
 
 ## 7. Success metrics
 
 ### 7.1 User-centric metrics
 
-* Reduktion der Zeit für Noteneingabe um 50%
-* Steigerung der Nutzung statistischer Auswertungen um 80%
-* Verbesserung der Benutzerzufriedenheit auf 4.5/5 Sterne
-* Reduzierung manueller Berechnungen um 90%
+1.  **Engagement:** Anzahl der pro Woche erfassten Leistungen pro aktivem Nutzer.
+2.  **Retention:** Prozentsatz der Nutzer, die die App nach dem ersten Monat und nach dem ersten Semester weiterhin aktiv nutzen.
+3.  **Feature Adoption:** Prozentsatz der Nutzer, die mindestens ein benutzerdefiniertes Beurteilungskonzept und eine Rubrik erstellt haben.
 
 ### 7.2 Business metrics
 
-* 1000+ aktive Nutzer in den ersten 6 Monaten
-* 85% Nutzerretention nach 3 Monaten
-* Durchschnittlich 3 Klassen pro aktivem Nutzer
-* 95% erfolgreiche Datensynchronisation
+1.  **Verkäufe:** Anzahl der verkauften Lizenzen der Basis-App.
+2.  **Conversion Rate:** Prozentsatz der Nutzer, die das optionale Cloud-Abonnement abschließen.
+3.  **App Store Rating:** Durchschnittliche Bewertung in den jeweiligen App Stores.
 
 ### 7.3 Technical metrics
 
-* App-Start unter 3 Sekunden
-* Synchronisation in unter 10 Sekunden
-* 99.5% Uptime der Cloud-Services
-* Offline-Funktionalität für 30+ Tage
+1.  **Stabilität:** Crash-freie Sitzungsrate von >99.5%.
+2.  **Performance:** App-Startzeit unter 3 Sekunden auf Referenzgeräten.
+3.  **Synchronisation:** Erfolgsrate der Bluetooth-Synchronisation >95%.
 
 ## 8. Technical considerations
 
 ### 8.1 Integration points
 
-* SQLite für lokale Datenhaltung
-* Firebase/Supabase für Cloud-Synchronisation
-* Flutter für plattformübergreifende Entwicklung
-* Export zu Excel/PDF für Berichte
-* Import von CSV-Dateien für Schülerdaten
+1.  **Bluetooth:** Nutzung der nativen Bluetooth-APIs von iOS, Android, macOS und Windows zur Geräteerkennung und Datenübertragung.
+2.  **App Stores:** Anbindung an die In-App-Kauf-APIs von Apple und Google für das Cloud-Abonnement.
 
 ### 8.2 Data storage & privacy
 
-* DSGVO-konforme Datenhaltung
-* End-to-End Verschlüsselung für Cloud-Daten
-* Lokale Datenspeicherung als Standard
-* Opt-in für Cloud-Features
-* Automatische Datenlöschung nach konfigurierbarem Zeitraum
+1.  **Lokale Datenbank:** Verwendung einer robusten, plattformübergreifenden Datenbanklösung (z.B. SQLite via Drift/Moor oder Hive).
+2.  **Datenschutz:** Die App muss DSGVO-konform sein. Es werden keine Daten ohne explizite Zustimmung des Nutzers (Opt-in für Cloud) an externe Server gesendet. Wie vom Nutzer spezifiziert, werden die lokalen Daten nicht zusätzlich verschlüsselt.
 
 ### 8.3 Scalability & performance
 
-* Unterstützung für bis zu 500 Schüler pro Lehrer
-* Optimierte Datenbank-Queries für große Datenmengen
-* Lazy Loading für Listen und Statistiken
-* Caching-Strategien für häufig abgerufene Daten
+1.  **Skalierbarkeit:** Maximal Zuordnung von 40 Schüler pro Klasse, skallierbarkeit nicht notwendig
+2.  **Performance:** Die Flutter-App muss unter Beachtung von Performance-Best-Practices (z.B. Vermeidung unnötiger Rebuilds) entwickelt werden.
 
 ### 8.4 Potential challenges
 
-* Komplexe Datensynchronisation zwischen Geräten
-* Verschiedene Bewertungssysteme je nach Schulform
-* Offline-First Architektur bei gleichzeitiger Cloud-Integration
-* Performance bei großen Datenmengen
+1.  **Bluetooth-Zuverlässigkeit:** Die Stabilität und Geschwindigkeit der Bluetooth-Verbindung kann je nach Hardware, Betriebssystem und Umgebungsbedingungen stark variieren.
+2.  **Synchronisationslogik:** Die Entwicklung einer robusten, konfliktfreien Synchronisationslogik (CRDTs oder ähnliche Ansätze) ist komplex.
+3.  **Plattformspezifische Unterschiede:** Die Implementierung der Bluetooth-Funktionalität und die Sicherstellung eines konsistenten Verhaltens auf allen Zielplattformen ist eine Herausforderung.
 
 ## 9. Milestones & sequencing
 
 ### 9.1 Project estimate
 
-* Large: 6-8 Monate für MVP
+1.  **Mittel (M):** 4-6 Monate
 
 ### 9.2 Team size & composition
 
-* 3-4 Entwickler: Flutter Developer, Backend Developer, UI/UX Designer, Product Manager
+1.  **1-2 Entwickler:** 1-2 Flutter-Entwickler mit Erfahrung in der plattformübergreifenden Entwicklung.
 
 ### 9.3 Suggested phases
 
-* **Phase 1**: Grundfunktionen und lokale Datenhaltung (8-10 Wochen)
-  * Schüler- und Klassenverwaltung, Bewertungskonzepte, Notenerfassung
-
-* **Phase 2**: Statistische Auswertungen und Reporting (6-8 Wochen)
-  * Analyse-Dashboard, Export-Funktionen, erweiterte Filterung
-
-* **Phase 3**: Cloud-Integration und Synchronisation (6-8 Wochen)
-  * Backend-Infrastruktur, Offline-Sync, Multi-Device Support
-
-* **Phase 4**: Polish und erweiterte Features (4-6 Wochen)
-  * Performance-Optimierung, erweiterte Statistiken, Accessibility
+1.  **Phase 1: Fundament & Stammdaten (1-2 Monate)**
+    *   Einrichtung des Flutter-Projekts, Implementierung der lokalen Datenbank, Erstellung der UI für die Verwaltung von Klassen, Fächern und Schülern (Desktop-optimiert).
+2.  **Phase 2: Leistungserfassung (1-2 Monate)**
+    *   Implementierung der mobil-optimierten Schnellerfassungs-UI. Entwicklung der Funktionalität für die strukturierte Beurteilung mittels Rubriken. Erstellung der Logik für Beurteilungskonzepte.
+3.  **Phase 3: Kernlogik & Synchronisation (1-2 Monate)**
+    *   Implementierung der Notenberechnungslogik. Entwicklung und Test der Bluetooth-Synchronisation.
+4.  **Phase 4: Finalisierung & Release (1 Monat)**
+    *   Testing auf allen Zielplattformen, Bug-Fixing, Vorbereitung und Einreichung bei den App Stores.
 
 ## 10. User stories
 
-### 10.1. Schülerstammdaten verwalten
+### 10.1. Infrastruktur & Datenhaltung
 
-* **ID**: SM-001
-* **Description**: Als Lehrer möchte ich Schülerstammdaten erfassen und verwalten können, damit ich alle wichtigen Informationen meiner Schüler an einem Ort habe.
-* **Acceptance criteria**:
-  * Eingabe von Name, Vorname, Geburtsdatum
-  * Optional: Kontaktdaten, Foto, zusätzliche Notizen
-  * Bearbeitung und Löschung von Schülerdaten
-  * Validierung der Eingabedaten
-  * Suchfunktion nach Namen
+1.  **ID**: GH-001
+2.  **Related Features**: FR-1
+3.  **Description**: Als Lehrer möchte ich, dass meine Daten primär lokal auf meinem Gerät gespeichert werden, damit ich die volle Kontrolle habe und die App auch offline funktioniert.
+4.  **Acceptance criteria**:
+    1.  Alle Daten werden in einer lokalen Datenbank auf dem Gerät gespeichert.
+    2.  Die App ist ohne Internetverbindung vollständig nutzbar.
+    3.  Es findet keine automatische Datenübertragung an einen Cloud-Server statt.
 
-### 10.2. Klassen erstellen und Schüler zuordnen
+2.  **ID**: GH-002
+3.  **Related Features**: FR-2
+4.  **Description**: Als Lehrer möchte ich meine Daten sicher und direkt zwischen meinen Geräten via Bluetooth synchronisieren, um auf allen Geräten den gleichen Datenstand zu haben.
+5.  **Acceptance criteria**:
+    1.  Die App bietet eine manuelle Funktion "Geräte synchronisieren".
+    2.  Die App erkennt andere Geräte mit derselben App im lokalen Netzwerk via Bluetooth.
+    3.  Ein Konfliktlösungsmechanismus stellt die Datenkonsistenz sicher.
 
-* **ID**: SM-002
-* **Description**: Als Lehrer möchte ich Klassen erstellen und Schüler diesen zuordnen können, damit ich meine Schüler organisiert verwalten kann.
-* **Acceptance criteria**:
-  * Erstellung neuer Klassen mit Name und Schuljahr
-  * Zuordnung von Schülern zu Klassen per Drag-and-Drop
-  * Verschiebung von Schülern zwischen Klassen
-  * Anzeige aller Schüler einer Klasse
-  * Archivierung abgeschlossener Klassen
+3.  **ID**: GH-003
+4.  **Related Features**: AF-1
+5.  **Description**: Als Lehrer möchte ich optional meine Daten in einer Cloud sichern und synchronisieren können, falls ich ein Backup oder einen Abgleich über das Internet wünsche.
+6.  **Acceptance criteria**:
+    1.  Die Cloud-Synchronisation ist standardmäßig deaktiviert und muss explizit aktiviert werden.
+    2.  Diese Funktion wird als kostenpflichtiges Add-on angeboten.
 
-### 10.3. Bewertungskonzepte erstellen
+### 10.2. Stammdaten & Konzepte
 
-* **ID**: SM-003
-* **Description**: Als Lehrer möchte ich fachspezifische Bewertungskonzepte erstellen können, damit ich verschiedene Fächer nach angemessenen Kriterien bewerten kann.
-* **Acceptance criteria**:
-  * Definition von Bewertungskategorien (Tests, Mitarbeit, Projekte)
-  * Festlegung von Gewichtungen in Prozent
-  * Auswahl der Notenskala (1-6, Punkte, Kompetenzstufen)
-  * Speicherung als Template für Wiederverwendung
-  * Zuweisung zu spezifischen Fächern
+1.  **ID**: GH-004
+2.  **Related Features**: FR-3
+3.  **Description**: Als Lehrer möchte ich Klassen und Fächer anlegen und verwalten, um meine Unterrichtsstruktur in der App abzubilden.
+4.  **Acceptance criteria**:
+    1.  Ich kann eine Klasse mit einem Namen und Schuljahr anlegen.
+    2.  Ich kann Fächer mit einem Namen anlegen und sie Klassen zuordnen.
 
-### 10.4. Mitarbeit während des Unterrichts erfassen
+2.  **ID**: GH-005
+3.  **Related Features**: FR-3
+4.  **Description**: Als Lehrer möchte ich Schüler zu meinen Klassen hinzufügen und deren Stammdaten pflegen.
+5.  **Acceptance criteria**:
+    1.  Pro Schüler können Vorname, Nachname, Schulemail und ein optionales Foto erfasst werden.
+    2.  Kontaktdaten der Eltern und allgemeine Anmerkungen können gespeichert werden.
 
-* **ID**: SM-004
-* **Description**: Als Lehrer möchte ich die Mitarbeit meiner Schüler schnell während des Unterrichts erfassen können, damit ich ihre mündliche Leistung dokumentieren kann.
-* **Acceptance criteria**:
-  * Auswahl der Klasse und des Fachs
-  * Schnelle Eingabe per Tap/Click für jeden Schüler
-  * Verschiedene Bewertungsstufen (sehr gut, gut, befriedigend, etc.)
-  * Automatische Zeitstempel
-  * Zusätzliche Notizen optional
-  * Offline-Funktionalität
+3.  **ID**: GH-006
+4.  **Related Features**: FR-4
+5.  **Description**: Als Lehrer möchte ich Vorlagen für Beurteilungskonzepte erstellen und zuweisen, um die Notenfindung zu standardisieren.
+6.  **Acceptance criteria**:
+    1.  Ich kann eine Vorlage mit Leistungskategorien und deren prozentualer Gewichtung erstellen.
+    2.  Ich kann einer Klasse in einem Fach eine Konzept-Vorlage zuweisen.
 
-### 10.5. Noten für Tests und Arbeiten eingeben
+### 10.3. Leistungserfassung & Auswertung
 
-* **ID**: SM-005
-* **Description**: Als Lehrer möchte ich Noten für Tests, Klassenarbeiten und Projekte eingeben können, damit ich die schriftlichen Leistungen meiner Schüler dokumentiere.
-* **Acceptance criteria**:
-  * Eingabe von Noten für alle Schüler einer Klasse
-  * Angabe von Datum und Thema der Leistung
-  * Kategorisierung nach Leistungstyp
-  * Möglichkeit für Kommentare und Anhänge
-  * Bulk-Eingabe für mehrere Schüler
-  * Validierung der Noten entsprechend dem Bewertungskonzept
+1.  **ID**: GH-007
+2.  **Related Features**: FR-5
+3.  **Description**: Als Lehrer möchte ich im Unterricht mit einem Klick die mündliche Mitarbeit eines Schülers protokollieren.
+4.  **Acceptance criteria**:
+    1.  In der Unterrichtsansicht wird bei einem kurzen Klick auf den Schüler (Nameskürzel oder Bild), für die mündliche Mitarbeit ein Zähler inkrementiert (+1 Funktionalität)
+    2. Ein Klick erzeugt einen positiven Eintrag für "Mündliche Mitarbeit" für den heutigen Tag.
 
-### 10.6. Individuelle Schülerstatistiken anzeigen
+5.  **ID**: GH-008
+6.  **Related Features**: FR-5
+7.  **Description**: Als Lehrer möchte ich eine mündliche Wiederholung schnell benoten können.
+8.  **Acceptance criteria**:
+    1.  Eine Aktion (z.B. langer Druck) in der Unterrichtsansicht auf den Schüler (Kürzel/Bild) öffnet ein Menü zur Auswahl von "Wiederholung".
+    2.  Ein Dialog zur Eingabe einer Note von 1 bis 5 erscheint.
 
-* **ID**: SM-006
-* **Description**: Als Lehrer möchte ich statistische Auswertungen für einzelne Schüler sehen können, damit ich deren Leistungsentwicklung verfolgen kann.
-* **Acceptance criteria**:
-  * Anzeige von Notendurchschnitt über Zeit
-  * Visualisierung der Leistungsentwicklung als Diagramm
-  * Aufschlüsselung nach Bewertungskategorien
-  * Vergleich mit Klassendurchschnitt
-  * Export als PDF oder Excel
-  * Filterung nach Zeitraum und Fach
+9.  **ID**: GH-009
+4.  **Related Features**: FR-6
+5.  **Description**: Als Lehrer möchte ich komplexe Leistungen wie Projekte anhand einer detaillierten Rubrik bewerten.
+6.  **Acceptance criteria**:
+    1.  Ich kann Rubrik-Vorlagen mit gewichteten Kriterien erstellen.
+    2.  Ich kann eine Leistung anhand einer Rubrik bewerten, indem ich pro Kriterium eine Note und einen Kommentar vergebe.
+    3.  Die App berechnet die Gesamtnote für die Leistung automatisch.
 
-### 10.7. Klassenstatistiken erstellen
-
-* **ID**: SM-007
-* **Description**: Als Lehrer möchte ich Statistiken für ganze Klassen erstellen können, damit ich die Gesamtleistung und Verteilung analysieren kann.
-* **Acceptance criteria**:
-  * Berechnung von Klassendurchschnitt und Median
-  * Notenverteilung als Histogram
-  * Identifikation von Leistungstrends
-  * Vergleich zwischen verschiedenen Fächern
-  * Liste der besten und schwächsten Schüler
-  * Exportfunktionen für Berichte
-
-### 10.8. Daten lokal und in der Cloud speichern
-
-* **ID**: SM-008
-* **Description**: Als Lehrer möchte ich meine Daten sowohl lokal als auch in der Cloud speichern können, damit ich flexibel arbeiten und meine Daten sichern kann.
-* **Acceptance criteria**:
-  * Lokale Speicherung als Standard ohne Internet
-  * Optionale Cloud-Synchronisation nach Registrierung
-  * Automatische Synchronisation bei Internetverbindung
-  * Konfliktauflösung bei parallelen Änderungen
-  * Vollständiges Backup und Wiederherstellung
-  * Verschlüsselung aller Cloud-Daten
-
-### 10.9. Zwischen Desktop und Mobile wechseln
-
-* **ID**: SM-009
-* **Description**: Als Lehrer möchte ich nahtlos zwischen Desktop- und Mobile-App wechseln können, damit ich flexibel arbeiten kann.
-* **Acceptance criteria**:
-  * Identische Daten auf allen Geräten
-  * Optimierte UI für verschiedene Bildschirmgrößen
-  * Synchronisation in Echtzeit oder bei App-Start
-  * Offline-Änderungen werden beim nächsten Sync übertragen
-  * Einstellungen werden geräteübergreifend synchronisiert
-
-### 10.10. Fächerübergreifende Analysen durchführen
-
-* **ID**: SM-010
-* **Description**: Als Lehrer möchte ich fächerübergreifende Analysen erstellen können, damit ich Zusammenhänge zwischen verschiedenen Fächern erkennen kann.
-* **Acceptance criteria**:
-  * Vergleich der Leistungen eines Schülers in verschiedenen Fächern
-  * Korrelationsanalysen zwischen Fächer
-  * Identifikation von Stärken und Schwächen
-  * Gesamtnotendurchschnitt über alle Fächer
-  * Visualisierung als Radar-Chart oder Balkendiagramm
-
-### 10.11. Bewertungskonzepte als Templates speichern
-
-* **ID**: SM-011
-* **Description**: Als Lehrer möchte ich erfolgreich erprobte Bewertungskonzepte als Templates speichern können, damit ich sie für neue Klassen wiederverwenden kann.
-* **Acceptance criteria**:
-  * Speicherung von Bewertungskonzepten als benannte Templates
-  * Kategorisierung nach Fächern oder Schultypen
-  * Bearbeitung und Anpassung bestehender Templates
-  * Import/Export von Templates
-  * Sharing von Templates zwischen Geräten
-
-### 10.12. Schülerdaten importieren und exportieren
-
-* **ID**: SM-012
-* **Description**: Als Lehrer möchte ich Schülerdaten aus bestehenden Listen importieren und eigene Daten exportieren können, damit ich nicht alles neu eingeben muss.
-* **Acceptance criteria**:
-  * Import von CSV-Dateien mit Schülerdaten
-  * Mapping von Spalten auf Datenfelder
-  * Validierung und Fehlerbehandlung beim Import
-  * Export aller Daten als CSV oder Excel
-  * Backup-Funktion für komplette Datenbank
-  * DSGVO-konforme Datenanonymisierung beim Export
-
-### 10.13. Benutzerauthentifizierung und Datenschutz
-
-* **ID**: SM-013
-* **Description**: Als Lehrer möchte ich mich sicher anmelden können und sicher sein, dass meine Schülerdaten geschützt sind, damit ich die App datenschutzkonform nutzen kann.
-* **Acceptance criteria**:
-  * Registrierung mit E-Mail und sicherem Passwort
-  * Lokale Anmeldung ohne Internet möglich
-  * Verschlüsselung aller lokalen Daten
-  * DSGVO-konforme Datenhaltung
-  * Möglichkeit zur vollständigen Datenlöschung
-  * Passwort-Reset Funktion
-
-### 10.14. Offline-Funktionalität nutzen
-
-* **ID**: SM-014
-* **Description**: Als Lehrer möchte ich die App auch ohne Internetverbindung vollständig nutzen können, damit ich unabhängig von der Netzwerkqualität arbeiten kann.
-* **Acceptance criteria**:
-  * Alle Kernfunktionen offline verfügbar
-  * Lokale Datenspeicherung und -synchronisation
-  * Anzeige des Offline-Status in der UI
-  * Automatische Synchronisation bei Wiederverbindung
-  * Konfliktauflösung bei gleichzeitigen Offline-Änderungen
-  * Mindestens 30 Tage offline-Nutzung möglich
-
-### 10.15. Erweiterte Suchfunktionen nutzen
-
-* **ID**: SM-015
-* **Description**: Als Lehrer möchte ich erweiterte Such- und Filterfunktionen nutzen können, damit ich schnell spezifische Informationen finde.
-* **Acceptance criteria**:
-  * Volltextsuche über alle Schülerdaten
-  * Filterung nach Klasse, Fach, Zeitraum
-  * Sortierung nach verschiedenen Kriterien
-  * Gespeicherte Suchfilter
-  * Schnellzugriff auf häufig gesuchte Daten
-  * Erweiterte Suchoperatoren (UND, ODER, NICHT)
+7.  **ID**: GH-010
+5.  **Related Features**: FR-7
+6.  **Description**: Als Lehrer möchte ich, dass die App mir eine vorläufige Gesamtnote für einen Schüler berechnet.
+7.  **Acceptance criteria**:
+    1.  Die App zeigt eine Übersicht aller Leistungen eines Schülers in einem Fach.
+    2.  Basierend auf dem Beurteilungskonzept wird eine gewichtete Gesamtnote berechnet und angezeigt.

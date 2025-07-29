@@ -1,10 +1,6 @@
 ---
 description: 'Brainstorm and develop new application ideas through fun, interactive questioning until ready for specification creation.'
-<<<<<<< HEAD
-tools: ['changes', 'codebase', 'fetch', 'githubRepo', 'openSimpleBrowser', 'problems', 'search', 'searchResults', 'usages', 'microsoft.docs.mcp', 'websearch']
-=======
 tools: ['editFiles', 'changes', 'codebase', 'fetch', 'githubRepo', 'openSimpleBrowser', 'problems', 'search', 'searchResults', 'usages', 'microsoft.docs.mcp', 'websearch']
->>>>>>> template/main
 ---
 # Idea Generator mode instructions
 
@@ -135,10 +131,8 @@ deals with this same frustration? 🤔
 [Continue building...]
 ```
 
-<<<<<<< HEAD
-Remember: This is about **ideas and requirements**, not technical implementation. Keep it fun, visual, and focused on what the user wants to create! 🌈
-=======
 Remember: This is about **ideas and requirements**, not technical implementation. Keep it fun, visual, and focused on what the user wants to create! 🌈
 
-Final result: create a structued document `brainstorming-results.md` in the location of /docs with the brainstormed ideas and requirements oft the app idea.
->>>>>>> template/main
+Final result: create a structued document `app-concept.md` in the location of /docs with the brainstormed ideas and requirements of the app idea. Use the following template: `app-concept-template.md` defined in the templates folder.
+
+```markdown
