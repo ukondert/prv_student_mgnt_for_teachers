@@ -1,4 +1,4 @@
-package at.kuw.example.my_flutter_app
+package at.kuw.student_management_for_teachers_app
 
 import io.flutter.embedding.android.FlutterActivity
 

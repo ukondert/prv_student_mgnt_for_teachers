@@ -1,14 +1,122 @@
 // Flutter Service Layer Pattern
+<<<<<<< HEAD
 // HTTP API Integration mit Error Handling
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
 import '../models/api_response.dart';
+=======
+// HTTP API Integration mit Error Handling und Dependency Injection
+
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+
+/// User model für API responses
+@immutable
+class User {
+  const User({
+    required this.id,
+    required this.name,
+    required this.email,
+    this.avatarUrl,
+    this.isActive = true,
+  });
+
+  final String id;
+  final String name;
+  final String email;
+  final String? avatarUrl;
+  final bool isActive;
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      avatarUrl: json['avatarUrl'] as String?,
+      isActive: json['isActive'] as bool? ?? true,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'avatarUrl': avatarUrl,
+      'isActive': isActive,
+    };
+  }
+
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? avatarUrl,
+    bool? isActive,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      avatarUrl: avatarUrl ?? this.avatarUrl,
+      isActive: isActive ?? this.isActive,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is User && other.id == id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
+}
+
+/// API Response wrapper für einheitliche Error Handling
+class ApiResponse<T> {
+  const ApiResponse({
+    required this.data,
+    this.error,
+    this.statusCode,
+  });
+
+  final T? data;
+  final String? error;
+  final int? statusCode;
+
+  bool get isSuccess => error == null && data != null;
+  bool get hasError => error != null;
+}
+
+/// Custom Exceptions für verschiedene API Error-Typen
+class ApiException implements Exception {
+  const ApiException(this.message, [this.statusCode]);
+  
+  final String message;
+  final int? statusCode;
+
+  @override
+  String toString() => 'ApiException: $message (Status: $statusCode)';
+}
+
+class NetworkException extends ApiException {
+  const NetworkException(super.message, [super.statusCode]);
+}
+
+class AuthenticationException extends ApiException {
+  const AuthenticationException(super.message, [super.statusCode]);
+}
+>>>>>>> template/main
 
 /// Service-Klasse für Benutzer-API-Operationen.
 /// 
 /// Demonstriert Flutter Best Practices:
+<<<<<<< HEAD
 /// - Singleton Pattern mit factory constructor
 /// - Async/await mit proper Error Handling
 /// - HTTP Client mit Timeouts
@@ -28,6 +136,33 @@ class UserService {
   static UserService get instance => _instance;
   
   final http.Client _httpClient = http.Client();
+=======
+/// - Dependency Injection pattern (statt Singleton)
+/// - Async/await mit proper Error Handling
+/// - HTTP Client mit Timeouts und Retries
+/// - JSON Serialization/Deserialization
+/// - Custom Exceptions für verschiedene Error-Typen
+/// - Structured Logging für Debugging
+/// - Network connectivity handling
+/// 
+/// Verwendung:
+/// ```dart
+/// final userService = UserService(httpClient: http.Client());
+/// final response = await userService.getUsers();
+/// if (response.isSuccess) {
+///   final users = response.data!;
+/// }
+/// ```
+class UserService {
+  UserService({
+    http.Client? httpClient,
+    String? baseUrl,
+  }) : _httpClient = httpClient ?? http.Client(),
+       _baseUrl = baseUrl ?? 'https://api.example.com';
+
+  final http.Client _httpClient;
+  final String _baseUrl;
+>>>>>>> template/main
   static const String _baseUrl = 'https://api.example.com/v1';
   static const Duration _timeout = Duration(seconds: 30);
   

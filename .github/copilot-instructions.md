@@ -1,67 +1,27 @@
-# Flutter Context Engineering - Copilot Instructions
+# Copilot-Anweisungen für das "Context Engineering" Template
 
-## 🎯 Primäre Direktiven
+## 1. Primäres Ziel
+Dieses Projekt dient als Vorlage und Referenz für "Context Engineering" mit GitHub Copilot. Alle generierten Inhalte müssen diesem Ziel dienen: Sie sollen klar, wiederverwendbar und leicht verständlich sein und die besten Praktiken für die Anleitung von KI-Assistenten demonstrieren.
 
-Als GitHub Copilot Agent für Flutter-Entwicklung befolgen Sie diese fundamentalen Regeln:
+## 2. Kernprinzipien
+- **Explizitheit vor Implizitheit**: Annahmen müssen in der Dokumentation oder im Code explizit gemacht werden.
+- **Modularität**: Kontext-Snippets, Regeln und Vorlagen sollten klein, fokussiert und wiederverwendbar sein.
+- **Automatisierung**: Wo immer möglich, sollen Skripte (`scripts/`) verwendet werden, um die Anwendung von Kontext zu validieren oder zu automatisieren.
+- **Dokumentation als Kontext**: Die `docs/` sind die primäre Quelle der Wahrheit. Verweise darauf, anstatt Inhalte zu duplizieren.
 
-### Flutter-Projektverständnis
+## 3. Wichtige Dateien und ihre Rollen
+- `docs/AGENT_RULES.md`: Die grundlegenden Verhaltensregeln für den Agenten. Halte dich strikt daran.
+- `docs/PATTERNS.md`: Eine Sammlung bewährter Lösungsansätze. Bevorzuge diese, wenn anwendbar.
+- `templates/`: Vorlagen sind der Ausgangspunkt für neue Features oder Dokumente. Frage nach, welche Vorlage verwendet werden soll.
+- `examples/`: Konkrete Implementierungen, die als Referenz für Qualität und Stil dienen.
 
-- **IMMER** die Flutter-Projektstruktur (`lib/`, `pubspec.yaml`, `android/`, `ios/`) analysieren
-- Bestehende Widget-Patterns aus `examples/widgets/` verstehen und anwenden
-- Flutter/Dart Versionen und Zielplattformen berücksichtigen
-- Konsistenz mit vorhandenem State Management beibehalten
+## 4. Technischer Leitfaden
+- **Sprache**: ergibt sich aus dem Projekt Context, Markdown für Dokumentation (`.md`).
+- **MCP-Server**: Nutze die in `docs/MCP_SERVERS.md` definierten Model Context Protocol Server für die jeweils angegebenen Bereiche.
+- **Fehlerbehandlung**: Implementiere robustes Error-Handling und Logging für alle Skripte und API-Endpunkte.
 
-### Context-Driven Development
-
-- Nutzen Sie Flutter-spezifische MCP Server für Backend-Integration
-- Verwenden Sie Widget-Templates aus `templates/` als Ausgangspunkt
-- Beziehen Sie sich auf `docs/PATTERNS.md` für bewährte Praktiken
-- Berücksichtigen Sie die Projektdokumentation in `docs/`
-
-### Qualitätsstandards
-
-- Generieren Sie IMMER Widget Tests für neue Widgets
-- Implementieren Sie Error Handling für async/await Operationen
-- Optimieren Sie für Performance (const constructors, RepaintBoundary)
-- Folgen Sie Flutter Security Best Practices
-
-## 🏗️ Architektur-Richtlinien
-
-### Projektstruktur
-
-```text
-lib/
-├── core/           # Core utilities, constants
-├── data/           # Data layer (repositories, models)
-├── domain/         # Business logic (entities, use cases)
-├── presentation/   # UI layer (screens, widgets)
-├── shared/         # Shared widgets and utilities
-└── main.dart       # App entry point
-```
-
-### Clean Architecture
-
-- Trennen Sie Data, Domain und Presentation Layer
-- Implementieren Sie Repository Pattern
-- Verwenden Sie Use Cases für komplexe Business Logic
-
-## 🔐 Security & Best Practices
-
-### Security Checklist
-
-- [ ] Keine API Keys im Code
-- [ ] Input Validation implementiert
-- [ ] Sichere HTTP-Verbindungen (Certificate Pinning)
-- [ ] Biometrie/Secure Storage für sensitive Daten
-- [ ] Proper Error Messages (keine sensitive Infos)
-
-### Code Quality
-
-- Befolgen Sie Dart/Flutter Linting Rules
-- Implementieren Sie umfassende Tests (Unit, Widget, Integration)
-- Dokumentieren Sie komplexe Logik inline
-- Verwenden Sie meaningful Variable/Method Namen
-
----
-
-**Verwendung**: Diese Instructions sind automatisch aktiv für GitHub Copilot in diesem Projekt.
+## 5. Kommunikationsstil
+- **Klar und Präzise**: Formuliere Erklärungen und Kommentare so, dass sie sowohl für Menschen als auch für KI-Agenten leicht verständlich sind.
+- **Strukturierte Antworten**: Nutze Markdown (Listen, Tabellen, Codeblöcke), um Informationen übersichtlich darzustellen.
+- **Proaktive Vorschläge**: Wenn eine Anforderung unklar ist, schlage Alternativen vor, die den Projektprinzipien entsprechen.
+- **Iterative Entwicklung**: Sei offen für Feedback und bereit, Vorschläge zu iterieren, um die Qualität zu verbessern.
