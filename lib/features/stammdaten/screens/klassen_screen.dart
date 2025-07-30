@@ -5,7 +5,7 @@ import '../../../shared/widgets/list_item_widget.dart';
 import '../../../shared/widgets/stammdaten_view.dart';
 import '../models/klasse.dart';
 import '../providers/klassen_provider.dart';
-import '../widgets/klasse_dialog.dart';
+import '../widgets/klasse_dialog_refactored.dart';
 
 class KlassenScreen extends StatefulWidget {
   const KlassenScreen({super.key});
@@ -104,12 +104,16 @@ class _KlassenScreenState extends State<KlassenScreen> {
   Future<void> _showKlasseDialog(BuildContext context, {Klasse? klasse}) async {
     final isMobile = MediaQuery.of(context).size.width < 600;
     
-    await showDialog<void>(
+    final result = await showDialog<bool>(
       context: context,
       builder: (context) => isMobile 
-        ? KlasseDialog.mobile(klasse: klasse)
-        : KlasseDialog.desktop(klasse: klasse),
+        ? KlasseDialogRefactored.mobile(item: klasse)
+        : KlasseDialogRefactored.desktop(item: klasse),
     );
+
+    if (result == true && mounted) {
+      context.read<KlassenProvider>().loadKlassen();
+    }
   }
 
   Future<void> _showDeleteDialog(BuildContext context, Klasse klasse) async {

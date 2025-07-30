@@ -7,7 +7,7 @@ import '../models/fach.dart';
 import '../models/klasse.dart';
 import '../providers/faecher_provider.dart';
 import '../providers/klassen_provider.dart';
-import '../widgets/fach_dialog.dart';
+import '../widgets/fach_dialog_refactored.dart';
 
 class FaecherScreen extends StatefulWidget {
   const FaecherScreen({super.key});
@@ -156,8 +156,8 @@ class _FaecherScreenState extends State<FaecherScreen> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => isMobile 
-        ? FachDialog.mobile(fach: fach)
-        : FachDialog.desktop(fach: fach),
+        ? FachDialogRefactored.mobile(item: fach)
+        : FachDialogRefactored.desktop(item: fach),
     );
 
     if (result == true) {
