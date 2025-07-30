@@ -3,23 +3,27 @@ import 'package:uuid/uuid.dart';
 class Fach {
   final String id;
   final String name;
+  final String kuerzel;
   final List<String> klassenIds;
   final DateTime erstelltAm;
 
   const Fach({
     required this.id,
     required this.name,
+    required this.kuerzel,
     required this.klassenIds,
     required this.erstelltAm,
   });
 
   factory Fach.neu({
     required String name,
+    required String kuerzel,
     List<String> klassenIds = const [],
   }) {
     return Fach(
       id: const Uuid().v4(),
       name: name,
+      kuerzel: kuerzel,
       klassenIds: List.from(klassenIds),
       erstelltAm: DateTime.now(),
     );
@@ -28,6 +32,7 @@ class Fach {
   factory Fach.fromJson(Map<String, dynamic> json) => Fach(
         id: json['id'] as String,
         name: json['name'] as String,
+        kuerzel: json['kuerzel'] as String,
         klassenIds: List<String>.from(json['klassenIds'] as List),
         erstelltAm: DateTime.parse(json['erstelltAm'] as String),
       );
@@ -35,6 +40,7 @@ class Fach {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
+        'kuerzel': kuerzel,
         'klassenIds': klassenIds,
         'erstelltAm': erstelltAm.toIso8601String(),
       };
@@ -42,12 +48,14 @@ class Fach {
   Fach copyWith({
     String? id,
     String? name,
+    String? kuerzel,
     List<String>? klassenIds,
     DateTime? erstelltAm,
   }) =>
       Fach(
         id: id ?? this.id,
         name: name ?? this.name,
+        kuerzel: kuerzel ?? this.kuerzel,
         klassenIds: klassenIds ?? List.from(this.klassenIds),
         erstelltAm: erstelltAm ?? this.erstelltAm,
       );
@@ -74,37 +82,43 @@ class Fach {
   int get hashCode => id.hashCode;
 
   @override
-  String toString() => 'Fach{id: $id, name: $name, klassenIds: $klassenIds}';
+  String toString() => 'Fach{id: $id, name: $name, kuerzel: $kuerzel, klassenIds: $klassenIds}';
 }
 
 // DTOs für API-Aufrufe
 class FachCreateDto {
   final String name;
+  final String kuerzel;
   final List<String> klassenIds;
 
   const FachCreateDto({
     required this.name,
+    required this.kuerzel,
     this.klassenIds = const [],
   });
 
   Map<String, dynamic> toJson() => {
         'name': name,
+        'kuerzel': kuerzel,
         'klassenIds': klassenIds,
       };
 }
 
 class FachUpdateDto {
   final String? name;
+  final String? kuerzel;
   final List<String>? klassenIds;
 
   const FachUpdateDto({
     this.name,
+    this.kuerzel,
     this.klassenIds,
   });
 
   Map<String, dynamic> toJson() {
     final json = <String, dynamic>{};
     if (name != null) json['name'] = name;
+    if (kuerzel != null) json['kuerzel'] = kuerzel;
     if (klassenIds != null) json['klassenIds'] = klassenIds;
     return json;
   }
