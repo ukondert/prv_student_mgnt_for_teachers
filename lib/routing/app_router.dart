@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 
-import '../features/stammdaten/screens/klassen_screen.dart';
-import '../features/stammdaten/screens/faecher_screen.dart';
+import '../features/stammdaten/screens/klassen_screen_corrected.dart';
+import '../features/stammdaten/screens/faecher_screen_corrected.dart';
 import '../shared/widgets/app_layout.dart';
 
 class AppRouter {
