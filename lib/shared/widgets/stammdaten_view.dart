@@ -252,8 +252,13 @@ class _StammdatenViewState<T> extends State<StammdatenView<T>> {
   }
 
   Widget _buildListView() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+    
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: isMobile 
+        ? const EdgeInsets.all(8)  // Mobile: Weniger Padding
+        : const EdgeInsets.all(16), // Desktop: Standard Padding
       itemCount: widget.items.length,
       itemBuilder: (context, index) {
         final item = widget.items[index];

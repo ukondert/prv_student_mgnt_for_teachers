@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../models/klasse.dart';
-import '../providers/klassen_provider.dart';
+import '../providers/refactored_klassen_provider.dart';
 import '../../../shared/widgets/base_dialog.dart';
 
 class KlasseDialogRefactored extends BaseDialog<Klasse> {
@@ -151,14 +151,14 @@ class _KlasseDialogRefactoredState extends BaseDialogState<KlasseDialogRefactore
     final name = formValue['name'] as String;
     final schuljahr = formValue['schuljahr'] as String;
 
-    final provider = context.read<KlassenProvider>();
+    final provider = context.read<RefactoredKlassenProvider>();
 
     if (isEditing) {
-      final updatedKlasse = widget.item!.copyWith(
+      await provider.updateKlasse(
+        widget.item!.id,
         name: name,
         schuljahr: schuljahr,
       );
-      await provider.updateKlasse(updatedKlasse);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -169,11 +169,7 @@ class _KlasseDialogRefactoredState extends BaseDialogState<KlasseDialogRefactore
         );
       }
     } else {
-      final neueKlasse = Klasse.neu(
-        name: name,
-        schuljahr: schuljahr,
-      );
-      await provider.createKlasse(neueKlasse);
+      await provider.createKlasse(name, schuljahr);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

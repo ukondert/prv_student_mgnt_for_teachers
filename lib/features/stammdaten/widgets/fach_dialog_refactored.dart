@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../models/fach.dart';
-import '../providers/faecher_provider.dart';
-import '../providers/klassen_provider.dart';
+import '../models/klasse.dart';
+import '../dtos/klasse_dtos.dart';
+import '../providers/refactored_faecher_provider.dart';
+import '../providers/refactored_klassen_provider.dart';
 import '../../../shared/widgets/base_dialog.dart';
 
 class FachDialogRefactored extends BaseDialog<Fach> {
@@ -37,6 +39,17 @@ class _FachDialogRefactoredState extends BaseDialogState<FachDialogRefactored, F
 
   @override
   IconData get dialogIcon => isEditing ? Icons.edit : Icons.add;
+
+  // Helper method to convert DTO to Domain model
+  Klasse _klassenResponseToModel(KlasseResponse response) {
+    return Klasse(
+      id: response.id,
+      name: response.name,
+      schuljahr: response.schuljahr,
+      erstelltAm: response.erstelltAm,
+      istArchiviert: response.istArchiviert,
+    );
+  }
 
   @override
   FormGroup createForm() {
@@ -118,7 +131,7 @@ class _FachDialogRefactoredState extends BaseDialogState<FachDialogRefactored, F
         const SizedBox(height: 8),
         
         // Klassen Multi-Select
-        Consumer<KlassenProvider>(
+        Consumer<RefactoredKlassenProvider>(
           builder: (context, klassenProvider, child) {
             if (klassenProvider.isLoading) {
               return const Center(
@@ -126,7 +139,7 @@ class _FachDialogRefactoredState extends BaseDialogState<FachDialogRefactored, F
               );
             }
 
-            final allKlassen = klassenProvider.klassen;
+            final allKlassen = klassenProvider.klassen.map(_klassenResponseToModel).toList();
             if (allKlassen.isEmpty) {
               return Container(
                 padding: const EdgeInsets.all(16),
@@ -231,14 +244,14 @@ class _FachDialogRefactoredState extends BaseDialogState<FachDialogRefactored, F
     final kuerzel = formValue['kuerzel'] as String;
     final klassenIds = formValue['klassenIds'] as List<String>;
 
-    final provider = context.read<FaecherProvider>();
+    final provider = context.read<RefactoredFaecherProvider>();
 
     if (isEditing) {
       await provider.updateFach(
         widget.item!.id,
-        name,
-        kuerzel,
-        klassenIds,
+        name: name,
+        kuerzel: kuerzel,
+        klassenIds: klassenIds,
       );
       
       if (mounted) {
@@ -250,11 +263,7 @@ class _FachDialogRefactoredState extends BaseDialogState<FachDialogRefactored, F
         );
       }
     } else {
-      await provider.createFach(
-        name,
-        kuerzel,
-        klassenIds,
-      );
+      await provider.createFach(name, kuerzel, klassenIds: klassenIds);
       
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
