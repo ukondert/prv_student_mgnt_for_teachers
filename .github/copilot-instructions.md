@@ -16,7 +16,8 @@ Dieses Projekt dient als Vorlage und Referenz für "Context Engineering" mit Git
 - `examples/`: Konkrete Implementierungen, die als Referenz für Qualität und Stil dienen.
 
 ## 4. Technischer Leitfaden
-- **Sprache**: ergibt sich aus dem Projekt Context, Markdown für Dokumentation (`.md`).
+- **Programmier - Sprache**: ergibt sich aus dem Projekt Context, Markdown für Dokumentation (`.md`).
+- **Code - Sprache** (für Klassen, Interfaces, Methoden, Variablen usw.): Englisch wenn nicht explizt vom Benutzer anders vorgegeben   
 - **MCP-Server**: Nutze die in `docs/MCP_SERVERS.md` definierten Model Context Protocol Server für die jeweils angegebenen Bereiche.
 - **Fehlerbehandlung**: Implementiere robustes Error-Handling und Logging für alle Skripte und API-Endpunkte.
 

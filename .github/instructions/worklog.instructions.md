@@ -40,7 +40,21 @@ Jede Observation im Worklog enthält:
 - Nach jedem `apply_patch`, `run_in_terminal`, Commit oder Testlauf wird automatisch eine Observation an den Memory-MCP-Server gesendet.
 - Bei Fehlern wird eine Observation mit Fehlerbeschreibung und Stacktrace gespeichert.
 - Nach erfolgreichem Fix wird eine weitere Observation mit der Lösung gespeichert.
-- Am Ende der Session kann der Agent alle Observations als Markdown-Worklog exportieren (z.B. unter `docs/WORKLOG_<Datum>.md`).
+- Am Ende der Session kann der Agent alle Observations als Markdown-Worklog exportieren (z.B. unter `docs/WORKLOG_YYYY-MM-DD_hh-mm_[name].md`).
+
+## Datei-Namenskonvention
+
+WORKLOG-Dateien folgen der Namenskonvention: `WORKLOG_YYYY-MM-DD_hh-mm_[name].md`
+
+**Format-Erklärung:**
+- `YYYY-MM-DD`: Erstellungsdatum (ISO 8601 Format)
+- `hh-mm`: Erstellungszeit (Stunden und Minuten im 24h-Format)
+- `[name]`: Beschreibender Name des Features/Moduls/Fixes
+
+**Beispiele:**
+- `WORKLOG_2025-07-29_21-03_ResponsiveDialog_DataTable.md`
+- `WORKLOG_2025-07-30_11-07_Kuerzel_Feature.md`
+- `WORKLOG_2025-07-30_12-25_StammdatenView_Implementation.md`
 
 
 ## Best Practices
