@@ -69,39 +69,3 @@ class Klasse {
   @override
   String toString() => 'Klasse{id: $id, name: $name, schuljahr: $schuljahr}';
 }
-
-// DTOs für API-Aufrufe
-class KlasseCreateDto {
-  final String name;
-  final String schuljahr;
-
-  const KlasseCreateDto({
-    required this.name,
-    required this.schuljahr,
-  });
-
-  Map<String, dynamic> toJson() => {
-        'name': name,
-        'schuljahr': schuljahr,
-      };
-}
-
-class KlasseUpdateDto {
-  final String? name;
-  final String? schuljahr;
-  final bool? istArchiviert;
-
-  const KlasseUpdateDto({
-    this.name,
-    this.schuljahr,
-    this.istArchiviert,
-  });
-
-  Map<String, dynamic> toJson() {
-    final json = <String, dynamic>{};
-    if (name != null) json['name'] = name;
-    if (schuljahr != null) json['schuljahr'] = schuljahr;
-    if (istArchiviert != null) json['istArchiviert'] = istArchiviert;
-    return json;
-  }
-}
